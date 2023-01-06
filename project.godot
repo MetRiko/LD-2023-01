@@ -29,9 +29,18 @@ _global_script_class_icons={
 config/name="LD_2023_01"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=320
+window/size/height=180
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/LDtk-Importer/plugin.cfg", "res://addons/gut/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/LDtk-Importer/plugin.cfg" )
 
 [gui]
 
