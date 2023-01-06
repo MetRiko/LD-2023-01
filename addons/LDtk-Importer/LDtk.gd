@@ -140,8 +140,7 @@ func new_tilemap(tilemap_data):
 				var flip = int(tile["f"])
 				var flipX = bool(flip & 1)
 				var flipY = bool(flip & 2)
-				var grid_coords = coordId_to_gridCoords(tile.d[1], tilemap_data.__cWid)
-				tilemap.set_cellv(grid_coords, tile.d[1], flipX, flipY)
+				var grid_coords = pxCoords_to_gridCoords(tile.px, tilemap_data.__gridSize)
 				tilemap.set_cellv(grid_coords, tile.t, flipX, flipY)
 
 	return tilemap
@@ -186,7 +185,7 @@ func get_layer_tileset_data(layerDefUid):
 		if layer.uid == layerDefUid:
 			match layer.__type:
 				'AutoLayer', 'IntGrid':
-					tilesetId = layer.autoTilesetDefUid
+					tilesetId = layer.tilesetDefUid
 				'Tiles':
 					tilesetId = layer.tilesetDefUid
 
@@ -212,6 +211,14 @@ func get_tile_region(tileId, tileset_data):
 func coordId_to_gridCoords(coordId, gridWidth):
 	var gridY = floor(coordId / gridWidth)
 	var gridX = coordId - (gridY * gridWidth)
+
+	return Vector2(gridX, gridY)
+
+
+#converts pixels to grid coordinates.
+func pxCoords_to_gridCoords(pixelValues, gridSize):
+	var gridY = floor(pixelValues[1] / gridSize)
+	var gridX = floor(pixelValues[0] / gridSize)
 
 	return Vector2(gridX, gridY)
 
@@ -341,3 +348,4 @@ func get_tile_light_occluder_custom_shape(tileId, pointArray):
 	polygon.set_polygon(list)
 
 	return polygon
+	
