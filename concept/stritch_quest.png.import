@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/concept.png-f04425be7f29f7691979d555f91b1d60.stex"
+path="res://.import/stritch_quest.png-e74f1d2db75d0fae42f2973413377107.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://concept.png"
-dest_files=[ "res://.import/concept.png-f04425be7f29f7691979d555f91b1d60.stex" ]
+source_file="res://concept/stritch_quest.png"
+dest_files=[ "res://.import/stritch_quest.png-e74f1d2db75d0fae42f2973413377107.stex" ]
 
 [params]
 
