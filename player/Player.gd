@@ -1,36 +1,40 @@
 extends KinematicBody2D
 
-var MAX_SPEED = 300
-var ACCELERATION = 600
+const MAX_SPEED = 160
+const ACCELERATION = 20
 
-var speed = 0
-var move_dir = Vector2(0.0, 0.0)
+var move_dir = Vector2.ZERO
+var velocity = Vector2.ZERO
 
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	var orientation = get_orientation()
-	$Hammer.position.x = orientation * (8.0 + clamp(get_distance_to_mouse() * 0.1, 0.0, 16.0))
-	set_sprites_orientation(orientation)
+	var viewing_angle = get_viewing_angle()
+	
+	$Hammer.position = Vector2(
+		cos(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 8.0, 20.0),
+		sin(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 4.0, 6.0) - 8.0
+	)
+	
+	if orientation < 0.0:
+		$Sprite.flip_h = true
+		$Hammer.scale.x = -1.0
+	elif orientation > 0.0:
+		$Sprite.flip_h = false
+		$Hammer.scale.x = 1.0
+	
 	set_animation_frame()
 
 func _physics_process(delta):
 	move_dir.x = int(Input.is_action_pressed("game_right")) - int(Input.is_action_pressed("game_left"))
 	move_dir.y = int(Input.is_action_pressed("game_down")) - int(Input.is_action_pressed("game_up"))
-	if is_moving():
-		speed = clamp(speed + ACCELERATION * delta, 0.0, MAX_SPEED)
-		move_and_slide(move_dir.normalized() * speed)
-	else:
-		speed = 0
-
-func set_sprites_orientation(orientation):
-	if orientation < 0.0:
-		$Sprite.flip_h = true
-		$Hammer/Sprite.flip_h = true
-	elif orientation > 0.0:
-		$Sprite.flip_h = false
-		$Hammer/Sprite.flip_h = false
+	velocity = Vector2(
+		lerp(velocity.x, move_dir.x * MAX_SPEED, ACCELERATION * delta),
+		lerp(velocity.y, move_dir.y * MAX_SPEED, ACCELERATION * delta)
+	)
+	velocity = move_and_slide(velocity)
 
 func set_animation_frame():
 	var frame = get_action_frame()
