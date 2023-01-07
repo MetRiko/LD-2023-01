@@ -1,0 +1,33 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Shop" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 150.0
+margin_right = 320.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( -65, -84 )
+color = Color( 0.537255, 0.356863, 0.121569, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 290.0
+margin_right = 320.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.537255, 0.356863, 0.121569, 1 )
+
+[node name="ItemList" type="ItemList" parent="."]
+margin_left = 290.0
+margin_top = 19.0
+margin_right = 320.0
+margin_bottom = 180.0
+fixed_icon_size = Vector2( 25, 25 )
