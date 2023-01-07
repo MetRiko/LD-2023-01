@@ -94,8 +94,8 @@ func _process(delta):
 	shader.set_shader_param("scale", anim_scale)
 	
 	var vec = (target_pos - global_position)
-	var vecn = vec.normalized()
-	apply_impulse(Vector2.ZERO, vecn * vec.length() * 0.01)
+	var vel = vec.normalized() *  vec.length() * 0.01 * proper_scale
+	apply_impulse(Vector2.ZERO, vel)
 	
 func _on_timeout():
 	_select_random_target()
