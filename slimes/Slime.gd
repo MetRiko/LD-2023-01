@@ -8,6 +8,39 @@ var anim_vel = Vector2.RIGHT
 var squash_factor = Vector2(1.0, 0.3)
 
 var target_pos = Vector2(0.0, 0.0)
+var proper_scale = 1.0
+var anim_scale = proper_scale
+
+export var res : Resource
+
+var squish_tween : SceneTreeTween
+var anim_squish : float = 0.0
+
+func do_squish():
+	proper_scale = max(proper_scale - 0.1, 0.1)
+	_change_proper_scale(proper_scale)
+	play_squish()
+
+func _change_proper_scale(value : float):
+	proper_scale = value
+	var circle : CircleShape2D = $CollisionShape2D.shape
+	circle.radius = proper_scale * 24.0
+
+func play_squish():
+	if squish_tween:
+		squish_tween.kill()
+	squish_tween = get_tree().create_tween()
+	squish_tween.tween_method(self, "_on_squish", 0.0, 1.0, 1.2)
+		
+func _on_squish(x : float):
+	x = x * PI
+#	var target_squish = 0.5 * (sin((x - 10) * 12.0) + 1.0) * (x-10) * (x-10) * 0.01
+	var target_squish = 0.5 * (sin(6 * x + PI * 0.5) + 1.0) * cos(x * 0.5)
+	anim_squish = lerp(anim_squish, target_squish, 0.5)
+	var scale_factor = (1.0 - target_squish) * 0.5 + 0.5
+	anim_scale = lerp(anim_scale, scale_factor * proper_scale, 0.5)
+#	anim_squish = target_squish
+	squash_factor.y = anim_squish
 
 func _select_random_target():
 	target_pos = get_viewport_rect().size * get_viewport_transform().get_scale()
@@ -18,6 +51,8 @@ func _ready():
 	randomize()
 	$Timer.connect("timeout", self, "_on_timeout")
 	
+	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
+	
 	shader = $Icon.material.duplicate()
 	$Icon.material = shader
 	shader.set_shader_param("u_delta_time", randf() * 10.0 * 1000.0)
@@ -26,6 +61,11 @@ func _ready():
 	shader.set_shader_param("u_color", rand_col)
 	
 	_select_random_target()
+	_change_proper_scale(proper_scale)
+	
+func _input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+		do_squish()
 	
 func _process(delta):
 	var v = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -51,6 +91,7 @@ func _process(delta):
 #	var small_rad = 0.02
 #	shader.set_shader_param("u_small_rad", small_rad)
 	shader.set_shader_param("squash_factor", squash_factor)
+	shader.set_shader_param("scale", anim_scale)
 	
 	var vec = (target_pos - global_position)
 	var vecn = vec.normalized()
