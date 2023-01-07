@@ -30,6 +30,10 @@ config/name="LD_2023_01"
 run/main_scene="res://Root.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game="*res://Game.gd"
+
 [display]
 
 window/size/width=640
