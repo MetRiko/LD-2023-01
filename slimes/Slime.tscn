@@ -19,6 +19,8 @@ shader_param/squash_factor = Vector2( 1, 0.01 )
 shader_param/scale = 0.5
 shader_param/u_delta_time = 0.0
 shader_param/u_color = Plane( 0, 1, 0, 1 )
+shader_param/u_particle_speed_factor = 1.0
+shader_param/u_time_factor = 1.0
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0

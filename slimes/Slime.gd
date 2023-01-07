@@ -10,16 +10,35 @@ var squash_factor = Vector2(1.0, 0.3)
 var target_pos = Vector2(0.0, 0.0)
 var proper_scale = 1.0
 var anim_scale = proper_scale
+var current_color : Color
+
+const slime_particle := preload("res://slimes/SlimeParticle.tscn") 
 
 export var res : Resource
 
 var squish_tween : SceneTreeTween
 var anim_squish : float = 0.0
 
+func create_random_particle():
+	var p = slime_particle.instance()
+#	p.global_position = global_position
+	Game.add_particle(p)
+	p.global_position = global_position
+	var ang = rand_range(0, TAU)
+	var offset = Vector2(
+		cos(ang) * squash_factor.x * proper_scale * 200.0,
+		sin(ang) * squash_factor.y * proper_scale * 200.0
+	)
+	p.play_animation(global_position + offset, proper_scale * 2.0)
+	p.set_color(current_color)
+
 func do_squish():
 	proper_scale = max(proper_scale - 0.1, 0.1)
 	_change_proper_scale(proper_scale)
 	play_squish()
+	
+	for i in range(randi() % 5 + 3):
+		create_random_particle()
 
 func _change_proper_scale(value : float):
 	proper_scale = value
@@ -57,8 +76,8 @@ func _ready():
 	$Icon.material = shader
 	shader.set_shader_param("u_delta_time", randf() * 10.0 * 1000.0)
 	
-	var rand_col = Color.from_hsv(randf(), 0.8, 0.9)
-	shader.set_shader_param("u_color", rand_col)
+	current_color = Color.from_hsv(randf(), 0.8, 0.9)
+	shader.set_shader_param("u_color", current_color)
 	
 	_select_random_target()
 	_change_proper_scale(proper_scale)

@@ -8,12 +8,14 @@ uniform vec2 squash_factor = vec2(1.0, 0.01);
 uniform float scale = 0.5;
 uniform float u_delta_time = 0.0;
 uniform vec4 u_color = vec4(0.0, 1.0, 0.0, 1.0);
+uniform float u_particle_speed_factor = 1.0;
+uniform float u_time_factor = 1.0;
 
 float msign(in float x) { return (x<0.0)?-1.0:1.0; }
 
 float sdEllipse( vec2 p, in vec2 ab )
 {
-  //if( ab.x==ab.y ) return length(p)-ab.x;
+  	if( ab.x==ab.y ) return length(p)-ab.x;
 
 	p = abs( p ); 
     if( p.x>p.y ){ p=p.yx; ab=ab.yx; }
@@ -137,6 +139,7 @@ void fragment() {
 //	u_speed = 1.0;
 	
 	float time = TIME + u_delta_time;
+	time *= u_time_factor;
 	
 	for (int ix = 0; ix < n; ++ix) {
 		int i = ix % 4;
@@ -199,8 +202,8 @@ void fragment() {
 //		offset += -offset * (u_small_rad * (1.0 - u_speed));
 
 		if (ix > 0) {
-			offset += u_vel * u_speed * 0.4;
-			float factor = (sin(time * 10.0 + float(ix) * 2.0) + 1.0) * 0.5; // 0.0 - 1.0
+			offset += u_vel * u_speed * 0.4 * u_particle_speed_factor;
+			float factor = (sin(time * 10.0 * pow(u_particle_speed_factor, 0.08) + float(ix) * 2.0) + 1.0) * 0.5; // 0.0 - 1.0
 			offset -= offset * u_speed * factor * 0.6;
 //			offset = u_vel * 0.5;
 		}
