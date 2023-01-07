@@ -2,9 +2,6 @@
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 14.0
-
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
@@ -27,12 +24,18 @@ float dis_slime_shape(vec2 p, vec2 s, float rad) {
 //	float ang = atan()
 }
 
+float dis_orb_shape(vec2 p, vec2 s, float rad) {
+	vec2 v = p - s;
+	float d = length(v);
+	return max(d - rad, 0.0);// + thickness;
+}
+
 void fragment() {
 	float PI = 3.14159;
 	float TAU = 3.14159 * 2.0;
-	float start_angles[] = {0.0, TAU * 0.3333, TAU * 0.6666, TAU * 1.0};
+//	float start_angles[] = {0.0, TAU * 0.3333, TAU * 0.6666, TAU * 1.0};
 //	float start_dists[] = {0.25, 0.15, 0.2, 0.175};
-	float start_dists[] = {0.2, 0.2, 0.2, 0.2};
+//	float start_dists[] = {0.2, 0.2, 0.2, 0.2};
 	float start_radiuses[] = {0.05, 0.05, 0.05, 0.05};
 
 	COLOR = vec4(0.0, 0.0, 0.0, 0.0);
@@ -40,16 +43,20 @@ void fragment() {
 	float fd = 0.0;
 	int n = 30;
 	
+	float u_rad = 0.4;
+	float u_small_rad = 0.05;
+	
 	for (int ix = 0; ix < n; ++ix) {
 		int i = ix % 4;
-		float ang = start_angles[i];
-		float dis = start_dists[i];
-		float rad = start_radiuses[i];
-		rad *= 0.1;
+//		float ang = start_angles[i];
+//		float dis = start_dists[i];
+		float dis = u_rad;
+//		float rad = start_radiuses[i];
+		float rad = (float(i) + 1.0) * 0.05 * u_small_rad;
 		int s = (ix % 2) * 2 - 1;
 //		ang += float(s) * TIME * 0.8 + float(s) * ((sin(TIME * 0.5) + 1.0) * 0.1) * 8.0 + (sin(float(ix+1))) * 0.3;
 		
-		ang = (float(ix) / float(n-1)) * TAU;
+		float ang = (float(ix) / float(n-1)) * TAU;
 		ang += (sin(TIME * 0.8 * float(ix) * 0.1) + 1.0) * 0.5 * float(s);
 		
 		float a = mod(ang, PI); // 0 - TAU
@@ -67,13 +74,17 @@ void fragment() {
 //			dis *= 0.75;
 //			dis = (dis + (sin(TIME * float(i) * 0.1) + 1.0) * 0.5 * 0.05) * 0.75;
 			
-			dis = 0.1 + 0.01;
+//			dis = 0.1 + 0.01;
+			dis = u_rad * 0.5;
+			if (ix < n / 2) {
+				dis = u_rad * 0.45;
+			}
 			
 //			dis = (dis + sin(TIME * float(ix + 1) * 0.1) * 0.05) * 0.75;
 		}
 		else {
 			ang = PI + 0.1;
-			rad = 0.1;
+			rad = u_rad;
 			dis = 0.0;
 			up_force = 0.0;
 		}
@@ -90,14 +101,18 @@ void fragment() {
 		float d = distance(UV, offset);
 
 		
-		if (mod(ang, TAU) < PI) {
-			d *= (sin(ang)) * 0.5 + 1.0;
-		}
+//		d /= rad / 20.0;
 //		float nd2 = max(min(d, thickness_rad) - rad, 0.0) / thickness;
 
 		if (ix == 0) {
-			d = dis_slime_shape(UV, offset, 0.4);
+			d = dis_slime_shape(UV, offset, u_rad);
 //			nd2 = d;
+		}
+		else {
+			d = dis_orb_shape(UV, offset, u_small_rad);
+			if (mod(ang, TAU) < PI) {
+				d *= (sin(ang)) * 0.5 + 1.0;
+			}
 		}
 //		if (ix % 2 == 1) {
 //			nd2 = nd2 - 1.0;
@@ -132,7 +147,7 @@ void fragment() {
 //	fd = fd / rad_sum;
 	fd = fd / float(n);
 	
-	if (fd > 9.0) {
+	if (fd > 6.0) {
 		COLOR = vec4(0.0, 1.0, 0.0, 1.0);
 	}
 //	COLOR = vec4(0.0, fd * fd * 0.01,  0.0, max(min(fd * 0.02, 1.0), 0.0));
@@ -170,16 +185,19 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 14.0
+
 [node name="SlimeTesting" type="Node2D"]
 
 [node name="Slime" type="KinematicBody2D" parent="."]
 position = Vector2( 73, 63 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime"]
-shape = SubResource( 1 )
 
 [node name="Icon" type="Sprite" parent="Slime"]
 material = SubResource( 3 )
 position = Vector2( 0, 4 )
 scale = Vector2( 1.28125, 1.28125 )
 texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime"]
+shape = SubResource( 1 )
