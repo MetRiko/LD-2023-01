@@ -34,7 +34,19 @@ func _physics_process(delta):
 		lerp(velocity.x, move_dir.x * MAX_SPEED, ACCELERATION * delta),
 		lerp(velocity.y, move_dir.y * MAX_SPEED, ACCELERATION * delta)
 	)
-	velocity = move_and_slide(velocity)
+
+	var new_velocity = move_and_slide(velocity, Vector2.ZERO, false, 4, 0.785398, false)
+	
+	if get_slide_count() > 0:
+		for i in range(get_slide_count()):
+			var result := get_slide_collision(i)
+			var obj = result.collider
+			if obj is Slime:
+				var push_force_factor = lerp(1.0, 0.2, obj.proper_scale * obj.proper_scale)
+				obj.linear_velocity = velocity.normalized() * MAX_SPEED * push_force_factor
+	
+	velocity = new_velocity
+
 
 func set_animation_frame():
 	var frame = get_action_frame()

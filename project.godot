@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GutTest",
 "language": "GDScript",
 "path": "res://addons/gut/test.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Slime",
+"language": "GDScript",
+"path": "res://slimes/Slime.gd"
 } ]
 _global_script_class_icons={
 "GutHookScript": "",
-"GutTest": ""
+"GutTest": "",
+"Slime": ""
 }
 
 [application]
