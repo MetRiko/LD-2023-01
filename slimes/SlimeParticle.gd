@@ -1,4 +1,5 @@
 extends Node2D
+class_name SlimeParticle
 
 var start_pos : Vector2
 var final_pos : Vector2
@@ -14,10 +15,18 @@ var start_scale : float
 var start_color : Color
 var final_color : Color
 
+func extract_some_gel(amount: int):
+	if amount > 0:
+		tween.custom_step(1.0)
+		if not tween.is_running():
+			queue_free()
+
 func _ready():
 	randomize()
 	shader = $Sprite.material.duplicate()
+	$HitBox/Shape.shape = $HitBox/Shape.shape.duplicate()
 	$Sprite.material = shader
+	$HitBox.monitorable = false
 	shader.set_shader_param("u_delta_time", randf() * 10.0 * 1000.0)
 
 func set_color(col : Color):
@@ -50,6 +59,9 @@ func _on_fading(x : float):
 #	$Sprite.scale = Vector2.ONE * lerp(start_scale, 0.0, x)
 	$Sprite.scale = Vector2.ONE * start_scale * factor
 	
+	var hitbox_circle : CircleShape2D = $HitBox/Shape.shape
+	hitbox_circle.radius = start_scale * factor * 6.0
+	
 func _on_faded():
 	queue_free()
 	
@@ -58,6 +70,10 @@ func _on_hit():
 	shader.set_shader_param("u_speed", 0.0)
 	shader.set_shader_param("squash_factor", Vector2(1.0, 0.01))
 	_start_fading()
+	$HitBox.monitorable = true
+	
+#	var hitbox_circle : CircleShape2D = $HitBox/Shape.shape
+#	hitbox_circle.radius = $Sprite.scale.x * 6.0
 	
 func _on_animation(x : float):
 	
