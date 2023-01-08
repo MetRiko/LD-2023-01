@@ -1,7 +1,6 @@
 extends HBoxContainer
 
 onready var coinTextCounter = $Text
-onready var coinIcon = $CoinSprite
 
 var coinAmmount
 
