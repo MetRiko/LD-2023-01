@@ -54,10 +54,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.175, 0.3 ),
-"transitions": PoolRealArray( 1, 0.159, 3.36359 ),
+"times": PoolRealArray( 0, 0.175, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 0.159, 3.36359, 1 ),
 "update": 0,
-"values": [ Vector2( -3, 0 ), Vector2( -3, -6 ), Vector2( -3, 8 ) ]
+"values": [ Vector2( -3, 0 ), Vector2( -3, -6 ), Vector2( -3, 8 ), Vector2( -3, 0 ) ]
 }
 
 [node name="Hammer" type="Node2D"]
@@ -75,5 +75,6 @@ texture = ExtResource( 1 )
 position = Vector2( 12, -15 )
 
 [node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
 anims/Idle = SubResource( 13 )
 anims/Swing = SubResource( 12 )

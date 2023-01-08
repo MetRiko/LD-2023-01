@@ -1,8 +1,13 @@
 extends Node2D
 class_name Hammer
 
+onready var anim = $Anim
+
 func play_swing():
-	$Anim.play("Swing")
+	anim.play("Swing")
 	
 func play_idle():
-	$Anim.play("Idle")
+	anim.play("Idle")
+
+func is_swinging():
+	return anim.current_animation == "Swing"
