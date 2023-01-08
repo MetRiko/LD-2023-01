@@ -77,34 +77,6 @@ tracks/2/keys = {
 "values": [ Vector2( 0, -12 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "WALK"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 3.0, 6.0, 9.0, 6.0, 3.0, 0.0, -3.0, -6.0, -9.0, -6.0, -3.0 ]
-}
-
 [sub_resource type="Animation" id=9]
 resource_name = "Walk"
 length = 0.8
@@ -135,8 +107,11 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=10]
-radius = 10.0
 height = 16.0
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 23.0
+height = 46.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 3
@@ -155,11 +130,14 @@ shape = SubResource( 8 )
 [node name="Anim" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
 anims/RESET = SubResource( 7 )
-anims/WALK = SubResource( 2 )
 anims/Walk = SubResource( 9 )
 
 [node name="Hammer" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -0.189999 )
+
+[node name="Body" parent="Hammer" index="0"]
+position = Vector2( -3, 0 )
+rotation = 0.0
 
 [node name="HammerHitbox" type="Area2D" parent="."]
 position = Vector2( 0, 14 )
@@ -174,5 +152,13 @@ texture = ExtResource( 4 )
 
 [node name="Shape" type="CollisionShape2D" parent="HammerHitbox"]
 shape = SubResource( 10 )
+
+[node name="Pocket" type="Node2D" parent="."]
+
+[node name="PickingHitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="PickingHitbox"]
+rotation = 1.57079
+shape = SubResource( 11 )
 
 [editable path="Hammer"]
