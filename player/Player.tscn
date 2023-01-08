@@ -103,7 +103,7 @@ position = Vector2( 0, 1 )
 rotation = 1.57079
 shape = SubResource( 8 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Anim" type="AnimationPlayer" parent="."]
 anims/IDLE = SubResource( 1 )
 anims/RESET = SubResource( 7 )
 anims/WALK = SubResource( 2 )
