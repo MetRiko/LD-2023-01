@@ -13,20 +13,18 @@ var velocity := Vector2.ZERO
 var hammer_pos_radius := Vector2(16.0, 8.0)
 
 func _ready():
-	start_hammer_pos = hammer.position
+	hammer.connect("hit", self, "_on_hit")
+	
+func _on_hit():
+#	var space = get_world_2d().get_direct_space_state()
+#	var results = space.intersect_point(hitpoint.global_position, 32, [], 2, false, true)
 
-func _update_hammer_pos():
-	var vec = get_global_mouse_position() - global_position
-	var dir = vec.normalized()
-	var factor = min(vec.length() / 100.0, 1.0) * 0.8 + 0.2
-	
-	var max_vec = dir * hammer_pos_radius
-	vec = max_vec * factor
-	
-	hammer.position = start_hammer_pos + vec
-	
-	hammer.scale.x = 1.0 if vec.x >= 0 else -1.0 
-	hammer.get_node("Body/Sprite").z_index = 0 if vec.y >= 0 else -1
+	var areas = $HammerHitbox.get_overlapping_areas()
+
+	for area in areas:
+		var slime = area.get_parent()
+		if slime is Slime:
+			slime.do_squish()
 
 func _input(event):
 	if event.is_action_pressed("game_swing"):
@@ -36,18 +34,19 @@ func _input(event):
 func _process(_delta):
 	var orientation = get_orientation()
 	var viewing_angle = get_viewing_angle()
-
-	if not hammer.is_swinging():
-		_update_hammer_pos()
+	
+	$HammerHitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
 	
 #	set_animation_frame()
 
 func _physics_process(delta):
 	move_direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
 #	move_direction = move_direction.normalized()
+	
+	var hammer_factor := 0.4 if hammer.is_swinging() else 1.0
 	velocity = Vector2(
-		lerp(velocity.x, move_direction.x * MAX_SPEED, ACCELERATION * delta),
-		lerp(velocity.y, move_direction.y * MAX_SPEED, ACCELERATION * delta)
+		lerp(velocity.x, move_direction.x * MAX_SPEED * hammer_factor, ACCELERATION * delta),
+		lerp(velocity.y, move_direction.y * MAX_SPEED * hammer_factor, ACCELERATION * delta)
 	)
 	
 	_update_animations()
