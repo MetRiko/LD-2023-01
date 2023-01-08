@@ -7,6 +7,7 @@ const ACCELERATION := 20
 onready var anim := $Anim
 onready var hammer := $Hammer
 onready var start_hammer_pos : Vector2
+var hammer_locked_pos := Vector2.ZERO
 var move_direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 var hammer_pos_radius := Vector2(16.0, 8.0)
