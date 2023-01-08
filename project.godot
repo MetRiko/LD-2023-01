@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/Hammer.gd"
 }, {
+"base": "Area2D",
+"class": "Pickable",
+"language": "GDScript",
+"path": "res://pickable/Pickable.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -34,15 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://slimes/Slime.gd"
 }, {
-"base": "Area2D",
+"base": "Pickable",
 "class": "SlimeJar",
 "language": "GDScript",
-"path": "res://slime_jar/SlimeJar.gd"
+"path": "res://pickable/SlimeJar.gd"
 } ]
 _global_script_class_icons={
 "GutHookScript": "",
 "GutTest": "",
 "Hammer": "",
+"Pickable": "",
 "Player": "",
 "Slime": "",
 "SlimeJar": ""
@@ -124,6 +130,11 @@ game_right={
 game_swing={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+game_action={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
