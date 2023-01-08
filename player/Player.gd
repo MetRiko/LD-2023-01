@@ -15,12 +15,24 @@ var hammer_pos_radius := Vector2(16.0, 8.0)
 
 func _ready():
 	hammer.connect("hit", self, "_on_hit")
+	$GelPickupHitbox.connect("area_entered", self, "_on_gel_entered")
+	
+func _on_gel_entered(gel_area : Area2D):
+	var jar = get_item_in_pocket()
+	if jar is SlimeJar:
+		var gel : SlimeParticle = gel_area.get_parent()
+		var amount_to_extract = 1
+		var overflow = jar.add_gel(gel.start_color, amount_to_extract)
+		gel.extract_some_gel(amount_to_extract - overflow)
 
 func _on_hit():
 	for area in hammer_hitbox.get_overlapping_areas():
 		var slime = area.get_parent()
 		if slime is Slime:
 			slime.do_squish()
+
+func get_item_in_pocket():
+	return $Pocket.get_child(0) if $Pocket.get_child_count() > 0 else null
 
 func _input(event):
 	if event.is_action_pressed("game_swing") and hammer.visible:
@@ -61,7 +73,7 @@ func _process(_delta):
 	if $Pocket.get_child_count() > 0:
 		var jar = $Pocket.get_child(0)
 		if jar is SlimeJar:
-			var target_angle_level = -velocity.x / MAX_SPEED
+			var target_angle_level = velocity.x / MAX_SPEED
 			var next_angle_level = lerp(jar.angle_level, target_angle_level, 0.08)
 			jar.change_angle_level(next_angle_level)
 

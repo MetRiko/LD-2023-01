@@ -38,9 +38,9 @@ func change_angle_level(level: float):
 	angle_level = level
 	shader.set_shader_param("u_angle_level", level)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		var n = add_gel(Color.from_hsv(rand_range(0.0, 1.0), 0.8, 1.0, 1.0), 1)
+#func _input(event):
+#	if event is InputEventMouseButton and event.is_pressed():
+#		var n = add_gel(Color.from_hsv(rand_range(0.0, 1.0), 0.8, 1.0, 1.0), 1)
 
 func _calculate_color():
 	if gels.size() > 0:
