@@ -10,25 +10,6 @@ var hammer_locked_pos = Vector2.ZERO
 
 onready var anim := $Anim
 onready var hammer := $Hammer
-onready var start_hammer_pos : Vector2
-
-var hammer_pos_radius := Vector2(16.0, 8.0)
-
-func _ready():
-	start_hammer_pos = hammer.position
-
-func _update_hammer_pos():
-	var vec = get_global_mouse_position() - global_position
-	var dir = vec.normalized()
-	var factor = min(vec.length() / 100.0, 1.0) * 0.8 + 0.2
-	
-	var max_vec = dir * hammer_pos_radius
-	vec = max_vec * factor
-	
-	hammer.position = start_hammer_pos + vec
-	
-	hammer.scale.x = 1.0 if vec.x >= 0 else -1.0 
-	hammer.get_node("Body/Sprite").z_index = 0 if vec.y >= 0 else -1
 
 func _input(event):
 	if event.is_action_pressed("game_swing"):
@@ -38,9 +19,6 @@ func _input(event):
 func _process(_delta):
 	var orientation = get_orientation()
 	var viewing_angle = get_viewing_angle()
-
-	if not hammer.is_swinging():
-		_update_hammer_pos()
 	
 #	set_animation_frame()
 

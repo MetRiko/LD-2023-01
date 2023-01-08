@@ -43,8 +43,10 @@ func do_squish():
 
 func _change_proper_scale(value : float):
 	proper_scale = value
-	var circle : CircleShape2D = $CollisionShape2D.shape
+	var circle : CircleShape2D = $Shape.shape
 	circle.radius = proper_scale * 24.0
+	var hitbox_circle : CircleShape2D = $Hitbox/Shape.shape
+	hitbox_circle.radius = proper_scale * 24.0 + 4.0
 
 func play_squish():
 	if squish_tween:
@@ -71,7 +73,7 @@ func _ready():
 	randomize()
 	$Timer.connect("timeout", self, "_on_timeout")
 	
-	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
+	$Shape.shape = $Shape.shape.duplicate()
 	
 	shader = $Icon.material.duplicate()
 	$Icon.material = shader
@@ -83,9 +85,9 @@ func _ready():
 	_select_random_target()
 	_change_proper_scale(proper_scale)
 	
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		do_squish()
+#func _input(event):
+#	if event is InputEventMouseButton and event.is_pressed():
+#		do_squish()
 	
 func _process(delta):
 	var v = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
