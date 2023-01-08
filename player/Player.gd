@@ -6,7 +6,7 @@ const ACCELERATION := 20
 
 onready var anim := $Anim
 onready var hammer := $Hammer
-onready var hammerHitbox := $HammerHitbox
+onready var hammer_hitbox := $HammerHitbox
 onready var start_hammer_pos : Vector2
 var hammer_locked_pos := Vector2.ZERO
 var move_direction := Vector2.ZERO
@@ -17,7 +17,7 @@ func _ready():
 	hammer.connect("hit", self, "_on_hit")
 
 func _on_hit():
-	for area in hammerHitbox.get_overlapping_areas():
+	for area in hammer_hitbox.get_overlapping_areas():
 		var slime = area.get_parent()
 		if slime is Slime:
 			slime.do_squish()
@@ -26,6 +26,15 @@ func _input(event):
 	if event.is_action_pressed("game_swing") and hammer.visible:
 		hammer_locked_pos = hammer.position
 		hammer.play_swing()
+	elif event.is_action_pressed("game_swing") and $Pocket.get_child_count() > 0:
+		var obj = $Pocket.get_child(0)
+		if obj is SlimeEgg:
+			obj.drop_on(get_parent())
+			obj.position = position
+			obj.get_node("Egg").visible = false
+			obj.set_pickable(false)
+			obj.set_ready_to_break()
+			_enable_hammer()
 	if event.is_action_pressed("game_action"):
 		if $Pocket.get_child_count() == 0:
 			for area in $PickingHitbox.get_overlapping_areas():
@@ -34,8 +43,7 @@ func _input(event):
 					if obj.is_pickable():
 						obj.pick_by($Pocket)
 						obj.position = Vector2.ZERO
-						hammer.visible = false
-						hammerHitbox.visible = false
+						_disable_hammer()
 						break
 	if event.is_action_released("game_action"):
 		if $Pocket.get_child_count() > 0:
@@ -44,12 +52,11 @@ func _input(event):
 			if obj is SlimeJar:
 				obj.reset_angle_level_with_animation()
 			obj.position = position
-			hammer.visible = true
-			hammerHitbox.visible = true
+			_enable_hammer()
 
 func _process(_delta):
 	var viewing_angle = _get_viewing_angle()
-	hammerHitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
+	hammer_hitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
 	
 	if $Pocket.get_child_count() > 0:
 		var jar = $Pocket.get_child(0)
@@ -87,6 +94,17 @@ func _update_animations():
 	else:
 		if anim.current_animation != "Idle":
 			anim.play("Idle")
+
+func _enable_hammer():
+	hammer.visible = true
+	hammer_hitbox.visible = true
+
+func _disable_hammer():
+	hammer.visible = false
+	hammer_hitbox.visible = false
+
+func _is_hammer_enabled():
+	return hammer.visible
 
 func _get_distance_to_mouse():
 	var diff = get_viewport().get_mouse_position() - get_transform().get_origin()
