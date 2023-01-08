@@ -40,15 +40,20 @@ func _input(event):
 		hammer.play_swing()
 	if event.is_action_pressed("game_action"):
 		if $Pocket.get_child_count() == 0:
+			var closest_distance := 100000.0
+			var closest_pickable : Pickable
 			for area in $PickingHitbox.get_overlapping_areas():
-				if area is Pickable:
-					var obj = area
-					if obj.is_pickable():
-						obj.pick_by($Pocket)
-						obj.position = Vector2.ZERO
-						hammer.visible = false
-						hammerHitbox.visible = false
-						break
+				if area is Pickable and area.is_pickable():
+					var dis = global_position.distance_squared_to(area.global_position)
+					if dis < closest_distance:
+						closest_distance = dis
+						closest_pickable = area
+			if closest_pickable:
+				closest_pickable.pick_by($Pocket)
+				closest_pickable.position = Vector2.ZERO
+				hammer.visible = false
+				hammerHitbox.visible = false
+
 	if event.is_action_released("game_action"):
 		if $Pocket.get_child_count() > 0:
 			var obj = $Pocket.get_child(0)
