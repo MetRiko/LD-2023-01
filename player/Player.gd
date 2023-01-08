@@ -33,6 +33,7 @@ func _process(_delta):
 func _physics_process(delta):
 	move_dir.x = int(Input.is_action_pressed("game_right")) - int(Input.is_action_pressed("game_left"))
 	move_dir.y = int(Input.is_action_pressed("game_down")) - int(Input.is_action_pressed("game_up"))
+	move_dir = move_dir.normalized()
 	velocity = Vector2(
 		lerp(velocity.x, move_dir.x * MAX_SPEED, ACCELERATION * delta),
 		lerp(velocity.y, move_dir.y * MAX_SPEED, ACCELERATION * delta)
