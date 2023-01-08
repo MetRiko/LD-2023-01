@@ -41,7 +41,8 @@ func play_animation(final_pos : Vector2, particle_scale : float):
 	
 func _start_fading():
 	var tween = get_tree().create_tween()
-	tween.tween_method(self, "_on_fading", 0.0, 1.0, 2.0 + rand_range(1.0, 2.0)) # dur based on length
+	print(start_scale)
+	tween.tween_method(self, "_on_fading", 0.0, 1.0, 3.0 + start_scale * 3.0 + rand_range(0.0, 2.0)) # dur based on length
 	tween.connect("finished", self, "_on_faded")
 	
 func _on_fading(x : float):
