@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 const MAX_SPEED = 160
 const ACCELERATION = 20
@@ -15,17 +16,19 @@ func _process(_delta):
 	
 	$Hammer.position = Vector2(
 		cos(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 8.0, 20.0),
-		sin(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 4.0, 6.0) - 8.0
+		sin(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 4.0, 6.0) - 14.0
 	)
 	
-	if orientation < 0.0:
-		$Sprite.flip_h = true
-		$Hammer.scale.x = -1.0
-	elif orientation > 0.0:
-		$Sprite.flip_h = false
-		$Hammer.scale.x = 1.0
+	$Sprite.flip_h = orientation < 0.0
+	$Hammer.scale.x = orientation
 	
 	set_animation_frame()
+	
+	if Input.is_action_just_pressed("game_swing"):
+		if orientation < 0.0:
+			$Hammer/AnimationPlayer.play("SWING_L")
+		else:
+			$Hammer/AnimationPlayer.play("SWING_R")
 
 func _physics_process(delta):
 	move_dir.x = int(Input.is_action_pressed("game_right")) - int(Input.is_action_pressed("game_left"))
@@ -34,34 +37,31 @@ func _physics_process(delta):
 		lerp(velocity.x, move_dir.x * MAX_SPEED, ACCELERATION * delta),
 		lerp(velocity.y, move_dir.y * MAX_SPEED, ACCELERATION * delta)
 	)
-
+	
 	var new_velocity = move_and_slide(velocity, Vector2.ZERO, false, 4, 0.785398, false)
 	
-	if get_slide_count() > 0:
-		for i in range(get_slide_count()):
-			var result := get_slide_collision(i)
-			var obj = result.collider
-			if obj is Slime:
-				var push_force_factor = lerp(1.0, 0.2, obj.proper_scale * obj.proper_scale)
-				obj.linear_velocity = velocity.normalized() * MAX_SPEED * push_force_factor
+	for i in range(get_slide_count()):
+		var obj = get_slide_collision(i).collider
+		if obj is Slime:
+			var push_force_factor = lerp(1.0, 0.2, obj.proper_scale * obj.proper_scale)
+			obj.linear_velocity = velocity.normalized() * MAX_SPEED * push_force_factor
 	
 	velocity = new_velocity
-
 
 func set_animation_frame():
 	var frame = get_action_frame()
 	match frame:
 		"IDLE":
-			$Sprite/AnimationPlayer.play(frame)
+			$AnimationPlayer.play(frame)
 		"WALK":
 			if move_dir.x < 0.0:
-				$Sprite/AnimationPlayer.play_backwards(frame)
+				$AnimationPlayer.play_backwards(frame)
 			elif move_dir.x > 0.0:
-				$Sprite/AnimationPlayer.play(frame)
+				$AnimationPlayer.play(frame)
 			if move_dir.y < 0.0:
-				$Sprite/AnimationPlayer.play_backwards(frame)
+				$AnimationPlayer.play_backwards(frame)
 			elif move_dir.y > 0.0:
-				$Sprite/AnimationPlayer.play(frame)
+				$AnimationPlayer.play(frame)
 
 func get_action_frame():
 	if is_moving():
