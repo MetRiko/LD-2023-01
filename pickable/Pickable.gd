@@ -1,6 +1,8 @@
 extends Area2D
 class_name Pickable
 
+signal is_pickable_changed
+
 var _is_pickable := true
 var _picker = null
 
@@ -15,12 +17,14 @@ func pick_by(node):
 		_transfer_to(node)
 		_is_pickable = false
 		_picker = node
+		emit_signal("is_pickable_changed", true)
 
 func drop_on(node):
 	if is_picked():
 		_transfer_to(node)
 		_is_pickable = true
 		_picker = null
+		emit_signal("is_pickable_changed", false)
 
 func is_picked():
 	return _picker != null

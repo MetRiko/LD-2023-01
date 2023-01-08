@@ -37,17 +37,26 @@ func _input(event):
 						hammer.visible = false
 						hammerHitbox.visible = false
 						break
-		else:
-			var obj = $Pocket.get_children()[0]
+	if event.is_action_released("game_action"):
+		if $Pocket.get_child_count() > 0:
+			var obj = $Pocket.get_child(0)
 			obj.drop_on(get_parent())
+			if obj is SlimeJar:
+				obj.reset_angle_level_with_animation()
 			obj.position = position
 			hammer.visible = true
 			hammerHitbox.visible = true
 
 func _process(_delta):
 	var viewing_angle = _get_viewing_angle()
-	
 	hammerHitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
+	
+	if $Pocket.get_child_count() > 0:
+		var jar = $Pocket.get_child(0)
+		if jar is SlimeJar:
+			var target_angle_level = -velocity.x / MAX_SPEED
+			var next_angle_level = lerp(jar.angle_level, target_angle_level, 0.08)
+			jar.change_angle_level(next_angle_level)
 
 func _physics_process(delta):
 	move_direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")

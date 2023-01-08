@@ -11,7 +11,7 @@ void vertex() {
 
 void fragment() {
 	
-	vec4 color = vec4(0.2, 0.0, 0.1, 1.0);
+	vec4 color = u_color;
 	vec4 trans = vec4(color.rgb, 0.0);
 	
 	float fill_level = u_fill_level; //0.85; //(1.0 + sin(TIME)) * 0.5;
@@ -36,11 +36,13 @@ void fragment() {
 		vec4 left_color = vec4(0.514, 0.937, 0.627, 0.6);
 		vec4 right_color = vec4(vec3(0.11, 0.408, 0.314) * 0.5, 1.0);
 		
-		COLOR = mix(trans, right_color, (1.0 - pow(sin((1.0-UV.x) * 3.14159 * 0.5), 1.8)));
+		COLOR = mix(vec4(right_color.rgb, 0.0), right_color, (1.0 - pow(sin((1.0-UV.x) * 3.14159 * 0.5), 1.8)));
 		COLOR = mix(COLOR, color, step(y, fill_level));
 		
 //		COLOR = mix(vec4(0.0, 1.0, 0.0, 1.0), COLOR, UV.x);
-		COLOR = mix(COLOR, left_color, (1.0 - pow(sin(UV.x * 3.14159 * 0.5), 0.4)));
+//		COLOR = mix(COLOR, left_color, (1.0 - pow(sin(UV.x * 3.14159 * 0.5), 0.4)));
+
+		COLOR = vec4(mix(COLOR.rgb, left_color.rgb, (1.0 - pow(sin(UV.x * 3.14159 * 0.5), 0.3))), max(COLOR.a, left_color.a));
 		
 	//	COLOR = vec4(UV.x, UV.y, 0.0, 1.0);
 	}

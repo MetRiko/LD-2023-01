@@ -7,9 +7,9 @@
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
-shader_param/u_color = Plane( 0.2, 0, 0.1, 1 )
+shader_param/u_color = Plane( 0.8, 0, 0.1, 1 )
 shader_param/u_fill_level = 0.5
-shader_param/u_max_height_diff = 0.6
+shader_param/u_max_height_diff = 0.7
 shader_param/u_angle_level = 0.4
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -32,6 +32,3 @@ hframes = 2
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 1 )
-
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

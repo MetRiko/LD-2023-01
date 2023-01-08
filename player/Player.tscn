@@ -154,6 +154,7 @@ texture = ExtResource( 4 )
 shape = SubResource( 10 )
 
 [node name="Pocket" type="Node2D" parent="."]
+position = Vector2( 0, -30 )
 
 [node name="PickingHitbox" type="Area2D" parent="."]
 
