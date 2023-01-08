@@ -1,10 +1,12 @@
 extends KinematicBody2D
+class_name Player
 
 const MAX_SPEED = 160
 const ACCELERATION = 20
 
-var move_dir = Vector2.ZERO
+var move_direction = Vector2.ZERO
 var velocity = Vector2.ZERO
+var hammer_locked_pos = Vector2.ZERO
 
 func _ready():
 	pass
@@ -13,55 +15,58 @@ func _process(_delta):
 	var orientation = get_orientation()
 	var viewing_angle = get_viewing_angle()
 	
-	$Hammer.position = Vector2(
-		cos(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 8.0, 20.0),
-		sin(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 4.0, 6.0) - 8.0
-	)
-	
-	if orientation < 0.0:
-		$Sprite.flip_h = true
-		$Hammer.scale.x = -1.0
-	elif orientation > 0.0:
-		$Sprite.flip_h = false
-		$Hammer.scale.x = 1.0
+	if $Hammer/AnimationPlayer.is_playing():
+		$Hammer.position = hammer_locked_pos
+	else:
+		$Sprite.flip_h = orientation < 0.0
+		$Hammer.scale.x = orientation
+		$Hammer.position = Vector2(
+			cos(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 8.0, 20.0),
+			sin(viewing_angle) * clamp(get_distance_to_mouse() * 0.1, 4.0, 6.0) - 14.0
+		)
 	
 	set_animation_frame()
+	
+	if Input.is_action_just_pressed("game_swing"):
+		hammer_locked_pos = $Hammer.position
+		if orientation < 0.0:
+			$Hammer/AnimationPlayer.play("SWING_L")
+		else:
+			$Hammer/AnimationPlayer.play("SWING_R")
 
 func _physics_process(delta):
-	move_dir.x = int(Input.is_action_pressed("game_right")) - int(Input.is_action_pressed("game_left"))
-	move_dir.y = int(Input.is_action_pressed("game_down")) - int(Input.is_action_pressed("game_up"))
+	move_direction.x = int(Input.is_action_pressed("game_right")) - int(Input.is_action_pressed("game_left"))
+	move_direction.y = int(Input.is_action_pressed("game_down")) - int(Input.is_action_pressed("game_up"))
+	move_direction = move_direction.normalized()
 	velocity = Vector2(
-		lerp(velocity.x, move_dir.x * MAX_SPEED, ACCELERATION * delta),
-		lerp(velocity.y, move_dir.y * MAX_SPEED, ACCELERATION * delta)
+		lerp(velocity.x, move_direction.x * MAX_SPEED, ACCELERATION * delta),
+		lerp(velocity.y, move_direction.y * MAX_SPEED, ACCELERATION * delta)
 	)
-
+	
 	var new_velocity = move_and_slide(velocity, Vector2.ZERO, false, 4, 0.785398, false)
 	
-	if get_slide_count() > 0:
-		for i in range(get_slide_count()):
-			var result := get_slide_collision(i)
-			var obj = result.collider
-			if obj is Slime:
-				var push_force_factor = lerp(1.0, 0.2, obj.proper_scale * obj.proper_scale)
-				obj.linear_velocity = velocity.normalized() * MAX_SPEED * push_force_factor
+	for i in range(get_slide_count()):
+		var obj = get_slide_collision(i).collider
+		if obj is Slime:
+			var push_force_factor = lerp(1.0, 0.2, obj.proper_scale * obj.proper_scale)
+			obj.linear_velocity = velocity.normalized() * MAX_SPEED * push_force_factor
 	
 	velocity = new_velocity
-
 
 func set_animation_frame():
 	var frame = get_action_frame()
 	match frame:
 		"IDLE":
-			$Sprite/AnimationPlayer.play(frame)
+			$AnimationPlayer.play(frame)
 		"WALK":
-			if move_dir.x < 0.0:
-				$Sprite/AnimationPlayer.play_backwards(frame)
-			elif move_dir.x > 0.0:
-				$Sprite/AnimationPlayer.play(frame)
-			if move_dir.y < 0.0:
-				$Sprite/AnimationPlayer.play_backwards(frame)
-			elif move_dir.y > 0.0:
-				$Sprite/AnimationPlayer.play(frame)
+			if move_direction.x < 0.0:
+				$AnimationPlayer.play_backwards(frame)
+			elif move_direction.x > 0.0:
+				$AnimationPlayer.play(frame)
+			if move_direction.y < 0.0:
+				$AnimationPlayer.play_backwards(frame)
+			elif move_direction.y > 0.0:
+				$AnimationPlayer.play(frame)
 
 func get_action_frame():
 	if is_moving():
@@ -80,4 +85,4 @@ func get_orientation():
 	return sign(get_viewport().get_mouse_position().x - get_transform().get_origin().x)
 
 func is_moving():
-	return move_dir != Vector2(0.0, 0.0)
+	return move_direction != Vector2(0.0, 0.0)
