@@ -11,6 +11,20 @@ var hammer_locked_pos = Vector2.ZERO
 onready var anim := $Anim
 onready var hammer := $Hammer
 
+func _ready():
+	hammer.connect("hit", self, "_on_hit")
+	
+func _on_hit():
+#	var space = get_world_2d().get_direct_space_state()
+#	var results = space.intersect_point(hitpoint.global_position, 32, [], 2, false, true)
+
+	var areas = $HammerHitbox.get_overlapping_areas()
+
+	for area in areas:
+		var slime = area.get_parent()
+		if slime is Slime:
+			slime.do_squish()
+
 func _input(event):
 	if event.is_action_pressed("game_swing"):
 		hammer_locked_pos = hammer.position
@@ -20,14 +34,18 @@ func _process(_delta):
 	var orientation = get_orientation()
 	var viewing_angle = get_viewing_angle()
 	
+	$HammerHitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
+	
 #	set_animation_frame()
 
 func _physics_process(delta):
 	move_direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
 #	move_direction = move_direction.normalized()
+	
+	var hammer_factor := 0.4 if hammer.is_swinging() else 1.0
 	velocity = Vector2(
-		lerp(velocity.x, move_direction.x * MAX_SPEED, ACCELERATION * delta),
-		lerp(velocity.y, move_direction.y * MAX_SPEED, ACCELERATION * delta)
+		lerp(velocity.x, move_direction.x * MAX_SPEED * hammer_factor, ACCELERATION * delta),
+		lerp(velocity.y, move_direction.y * MAX_SPEED * hammer_factor, ACCELERATION * delta)
 	)
 	
 	_update_animations()

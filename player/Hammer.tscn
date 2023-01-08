@@ -43,7 +43,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.175, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1.62451, 0.15932, 10.9283, 1 ),
+"transitions": PoolRealArray( 1.62451, 0.353553, 3.36359, 1 ),
 "update": 0,
 "values": [ 0.0, -74.9999, 75.0, 0.0 ]
 }
@@ -55,7 +55,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.175, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 0.159, 3.36359, 1 ),
+"transitions": PoolRealArray( 1, 0.353553, 3.36359, 1 ),
 "update": 0,
 "values": [ Vector2( -3, 0 ), Vector2( -3, -6 ), Vector2( -3, 8 ), Vector2( -3, 0 ) ]
 }
@@ -66,7 +66,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -79,14 +79,15 @@ position = Vector2( 0, -14 )
 script = ExtResource( 2 )
 
 [node name="Body" type="Node2D" parent="."]
-position = Vector2( -3, 0 )
+position = Vector2( -3, 6.88223 )
+rotation = 1.09997
 
 [node name="Sprite" type="Sprite" parent="Body"]
 position = Vector2( 10, -7 )
 texture = ExtResource( 1 )
 
 [node name="HitPoint" type="Position2D" parent="Body"]
-position = Vector2( 17, -19 )
+position = Vector2( 22, -15 )
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

@@ -46,7 +46,7 @@ func _change_proper_scale(value : float):
 	var circle : CircleShape2D = $Shape.shape
 	circle.radius = proper_scale * 24.0
 	var hitbox_circle : CircleShape2D = $Hitbox/Shape.shape
-	hitbox_circle.radius = proper_scale * 24.0 + 4.0
+	hitbox_circle.radius = proper_scale * 24.0 + 7.0
 
 func play_squish():
 	if squish_tween:
@@ -74,6 +74,7 @@ func _ready():
 	$Timer.connect("timeout", self, "_on_timeout")
 	
 	$Shape.shape = $Shape.shape.duplicate()
+	$Hitbox/Shape.shape = $Hitbox/Shape.shape.duplicate()
 	
 	shader = $Icon.material.duplicate()
 	$Icon.material = shader

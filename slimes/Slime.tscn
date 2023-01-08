@@ -21,9 +21,9 @@ shader_param/u_particle_speed_factor = 1.0
 shader_param/u_time_factor = 1.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 18.0
+radius = 21.0
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=6]
 radius = 14.0
 
 [node name="Slime" type="RigidBody2D"]
@@ -48,7 +48,7 @@ collision_mask = 3
 shape = SubResource( 5 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
