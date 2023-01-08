@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://res/projectFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/exit.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://sprites/settings.png" type="Texture" id=4]
 [ext_resource path="res://Shop/UIJar.gd" type="Script" id=5]
+[ext_resource path="res://Shop/Coins.gd" type="Script" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -570,6 +571,7 @@ margin_top = 68.0
 margin_right = 88.0
 margin_bottom = 116.0
 alignment = 1
+script = ExtResource( 6 )
 
 [node name="CoinSprite" type="TextureRect" parent="RightBar/Coins"]
 modulate = Color( 1, 0.937255, 0, 1 )
