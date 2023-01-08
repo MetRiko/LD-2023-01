@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Slime",
 "language": "GDScript",
 "path": "res://slimes/Slime.gd"
+}, {
+"base": "Area2D",
+"class": "SlimeJar",
+"language": "GDScript",
+"path": "res://slime_jar/SlimeJar.gd"
 } ]
 _global_script_class_icons={
 "GutHookScript": "",
 "GutTest": "",
 "Hammer": "",
 "Player": "",
-"Slime": ""
+"Slime": "",
+"SlimeJar": ""
 }
 
 [application]
