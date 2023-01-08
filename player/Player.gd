@@ -14,14 +14,6 @@ var hammer_pos_radius := Vector2(16.0, 8.0)
 func _ready():
 	start_hammer_pos = hammer.position
 
-<<<<<<< HEAD
-func _process(_delta):
-	set_animation_frame()
-	update_hammer_pos()
-	
-	if Input.is_action_just_pressed("game_swing"):
-		hammer.play_swing()
-=======
 func _update_hammer_pos():
 	var vec = get_global_mouse_position() - global_position
 	var dir = vec.normalized()
@@ -48,7 +40,6 @@ func _process(_delta):
 		_update_hammer_pos()
 	
 #	set_animation_frame()
->>>>>>> origin/metriko-slime
 
 func _physics_process(delta):
 	move_direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
@@ -71,39 +62,7 @@ func _physics_process(delta):
 	velocity = new_velocity
 	
 
-<<<<<<< HEAD
-func set_animation_frame():
-	var frame = get_action_frame()
-	match frame:
-		"IDLE":
-			$Anim.play(frame)
-		"WALK":
-			if move_direction.x < 0.0:
-				$Anim.play_backwards(frame)
-			elif move_direction.x > 0.0:
-				$Anim.play(frame)
-			if move_direction.y < 0.0:
-				$Anim.play_backwards(frame)
-			elif move_direction.y > 0.0:
-				$Anim.play(frame)
-
-func update_hammer_pos():
-	var vec = get_global_mouse_position() - global_position
-	var dir = vec.normalized()
-	var factor = min(vec.length() / 100.0, 1.0) * 0.8 + 0.2
-	
-	var max_vec = dir * hammer_pos_radius
-	vec = max_vec * factor
-		
-	hammer.position = start_hammer_pos + vec
-	
-	hammer.scale.x = 1.0 if vec.x >= 0 else -1.0 
-	hammer.get_node("Body/Sprite").z_index = 1 if vec.y >= 0 else -1 
-
-func get_action_frame():
-=======
 func _update_animations():
->>>>>>> origin/metriko-slime
 	if is_moving():
 		if anim.current_animation != "Walk":
 			anim.play("Walk", 0.1, 2.0)
