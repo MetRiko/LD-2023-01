@@ -28,7 +28,6 @@ func add_gel(color: Color, amount: int):
 			gel.amount -= overflow
 			all_gels_count = max_gels_count
 		final_color = _calculate_color()
-		print(final_color.h, final_color.s, final_color.v)
 		shader.set_shader_param("u_color", final_color)
 		shader.set_shader_param("u_fill_level", float(all_gels_count) / max_gels_count)
 	else:
