@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://slimes/Slime.gd"
 }, {
 "base": "Pickable",
+"class": "SlimeEgg",
+"language": "GDScript",
+"path": "res://pickable/SlimeEgg.gd"
+}, {
+"base": "Pickable",
 "class": "SlimeJar",
 "language": "GDScript",
 "path": "res://pickable/SlimeJar.gd"
@@ -51,6 +56,7 @@ _global_script_class_icons={
 "Pickable": "",
 "Player": "",
 "Slime": "",
+"SlimeEgg": "",
 "SlimeJar": ""
 }
 
