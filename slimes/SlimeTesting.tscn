@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://slimes/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://slimes/SlimeTesting.gd" type="Script" id=2]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://slime_jar/SlimeJar.png" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=3]
 friction = 0.0
@@ -78,3 +79,7 @@ physics_material_override = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_4"]
 position = Vector2( 320.5, 360 )
 shape = SubResource( 2 )
+
+[node name="SlimeJar" type="Sprite" parent="."]
+position = Vector2( 406, 47 )
+texture = ExtResource( 4 )
