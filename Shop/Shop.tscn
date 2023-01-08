@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://res/projectFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/exit.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://sprites/settings.png" type="Texture" id=4]
 [ext_resource path="res://Shop/UIJar.gd" type="Script" id=5]
 [ext_resource path="res://Shop/Coins.gd" type="Script" id=6]
+[ext_resource path="res://Shop/ExitGame.gd" type="Script" id=7]
+[ext_resource path="res://Shop/Options.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -23,6 +25,24 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = SubResource( 5 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="Theme" id=12]
+Button/fonts/font = ExtResource( 1 )
+Button/styles/disabled = SubResource( 7 )
+Button/styles/focus = SubResource( 8 )
+Button/styles/hover = SubResource( 9 )
+Button/styles/normal = SubResource( 10 )
+Button/styles/pressed = SubResource( 11 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -349,8 +369,8 @@ margin_bottom = 152.0
 
 [node name="SellerContainer" type="HBoxContainer" parent="."]
 modulate = Color( 0.54902, 1, 0.768627, 1 )
-margin_left = 272.0
-margin_right = 320.0
+margin_left = 264.0
+margin_right = 312.0
 margin_bottom = 152.0
 alignment = 1
 
@@ -703,3 +723,121 @@ size_flags_vertical = 0
 margin_left = 80.0
 margin_right = 80.0
 margin_bottom = 87.0
+
+[node name="ExitGame" type="Popup" parent="."]
+margin_left = 85.0
+margin_top = 48.0
+margin_right = 552.0
+margin_bottom = 311.0
+script = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="ExitGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.643137, 0.498039, 0, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExitGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 60
+
+[node name="Control" type="Control" parent="ExitGame/VBoxContainer"]
+margin_right = 467.0
+
+[node name="Label" type="Label" parent="ExitGame/VBoxContainer"]
+margin_top = 60.0
+margin_right = 467.0
+margin_bottom = 129.0
+custom_fonts/font = ExtResource( 1 )
+text = "Are you sure you want to quit
+ the game?"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ExitGame/VBoxContainer"]
+margin_top = 189.0
+margin_right = 467.0
+margin_bottom = 239.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="Button" type="Button" parent="ExitGame/VBoxContainer/HBoxContainer"]
+margin_left = 83.0
+margin_right = 183.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+theme = SubResource( 12 )
+text = "YES"
+
+[node name="ColorRect" type="ColorRect" parent="ExitGame/VBoxContainer/HBoxContainer/Button"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.176471, 0.0509804, 1 )
+
+[node name="Button2" type="Button" parent="ExitGame/VBoxContainer/HBoxContainer"]
+margin_left = 283.0
+margin_right = 383.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+theme = SubResource( 12 )
+text = "NO"
+
+[node name="ColorRect2" type="ColorRect" parent="ExitGame/VBoxContainer/HBoxContainer/Button2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.176471, 0.0509804, 1 )
+
+[node name="Options" type="Popup" parent="."]
+margin_left = 85.0
+margin_top = 48.0
+margin_right = 552.0
+margin_bottom = 311.0
+script = ExtResource( 8 )
+
+[node name="ColorRect" type="ColorRect" parent="Options"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.643137, 0.498039, 0, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 60
+
+[node name="Control" type="Control" parent="Options/VBoxContainer"]
+margin_right = 467.0
+
+[node name="Label" type="Label" parent="Options/VBoxContainer"]
+margin_top = 60.0
+margin_right = 467.0
+margin_bottom = 93.0
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
+margin_top = 153.0
+margin_right = 467.0
+margin_bottom = 203.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="Button" type="Button" parent="Options/VBoxContainer/HBoxContainer"]
+margin_left = 133.0
+margin_right = 333.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 200, 50 )
+theme = SubResource( 12 )
+text = "Toggle sound"
+
+[node name="ColorRect" type="ColorRect" parent="Options/VBoxContainer/HBoxContainer/Button"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.176471, 0.0509804, 1 )
+
+[connection signal="pressed" from="RightBar/Buttons/HBoxContainer/options" to="Options" method="_on_options_pressed"]
+[connection signal="pressed" from="RightBar/Buttons/HBoxContainer/exit" to="ExitGame" method="_on_exit_pressed"]
