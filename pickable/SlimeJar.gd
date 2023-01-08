@@ -66,5 +66,5 @@ func _ready():
 	shader.set_shader_param("u_color", final_color)
 	shader.set_shader_param("u_fill_level", all_gels_count / max_gels_count)
 	change_angle_level(angle_level)
-
+	
 	$Jar.frame = 0

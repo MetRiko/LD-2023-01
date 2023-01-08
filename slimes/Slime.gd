@@ -53,7 +53,11 @@ func play_squish():
 		squish_tween.kill()
 	squish_tween = get_tree().create_tween()
 	squish_tween.tween_method(self, "_on_squish", 0.0, 1.0, 1.2)
-		
+
+func set_color(color : Color):
+	current_color = color
+	shader.set_shader_param("u_color", current_color)
+
 func _on_squish(x : float):
 	x = x * PI
 #	var target_squish = 0.5 * (sin((x - 10) * 12.0) + 1.0) * (x-10) * (x-10) * 0.01

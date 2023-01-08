@@ -6,3 +6,6 @@ onready var slimes = root.get_node("SlimeTesting/Slimes")
 
 func add_particle(particle : Node):
 	slimes.add_child(particle)
+
+func add_slime(slime : Node):
+	slimes.add_child(slime)

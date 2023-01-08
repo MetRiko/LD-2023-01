@@ -137,10 +137,6 @@ anims/Walk = SubResource( 9 )
 [node name="Hammer" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -0.189999 )
 
-[node name="Body" parent="Hammer" index="0"]
-position = Vector2( -3, 0 )
-rotation = 0.0
-
 [node name="HammerHitbox" type="Area2D" parent="."]
 position = Vector2( 0, 14 )
 rotation = 1.57079
@@ -159,7 +155,6 @@ shape = SubResource( 10 )
 position = Vector2( 0, -30 )
 
 [node name="PickingHitbox" type="Area2D" parent="."]
-collision_layer = 0
 collision_mask = 4
 
 [node name="Shape" type="CollisionShape2D" parent="PickingHitbox"]
