@@ -19,8 +19,13 @@
 script = ExtResource( 12 )
 
 [node name="ShopRoom" parent="RoomSwitcher" instance=ExtResource( 11 )]
+position = Vector2( 4, -363 )
 
 [node name="SlimeRoom" parent="RoomSwitcher" instance=ExtResource( 1 )]
+
+[node name="Camera" type="Camera2D" parent="RoomSwitcher"]
+anchor_mode = 0
+current = true
 
 [node name="AudioPlayers" type="Node2D" parent="."]
 

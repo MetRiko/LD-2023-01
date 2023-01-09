@@ -10,6 +10,9 @@ var final_color : Color
 var max_gels_count := 20
 var angle_level := 0.0
 
+func is_jar_empty():
+	return all_gels_count == 0
+
 func reset_angle_level_with_animation():
 	var tween = get_tree().create_tween()
 	tween.tween_method(self, "change_angle_level", angle_level, 0.0, 0.4)

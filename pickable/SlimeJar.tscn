@@ -18,6 +18,7 @@ height = 8.0
 
 [node name="SlimeJar" type="Area2D"]
 collision_layer = 4
+collision_mask = 33
 script = ExtResource( 2 )
 
 [node name="Liquid" type="Sprite" parent="."]
@@ -31,5 +32,4 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
