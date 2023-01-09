@@ -7,6 +7,7 @@ var cracked := false
 
 func set_ready_to_break():
 	if not cracked:
+		$CrackParticles.emitting = true
 		cracked = true
 		$Egg.visible = false
 		set_pickable(false)
