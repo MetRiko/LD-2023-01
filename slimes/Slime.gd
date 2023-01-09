@@ -9,7 +9,7 @@ var anim_vel = Vector2.RIGHT
 var squash_factor = Vector2(1.0, 0.3)
 
 var target_pos = Vector2(0.0, 0.0)
-var proper_scale = 1.0
+var proper_scale = 0.5
 var anim_scale = proper_scale
 var current_color : Color
 
@@ -45,6 +45,10 @@ func do_squish():
 	
 	for i in range(randi() % 5 + 3):
 		create_random_particle()
+		
+	if proper_scale - 0.1 < 0.1:
+		yield(get_tree().create_timer(0.6), "timeout")
+		queue_free()
 
 func _change_proper_scale(value : float):
 	proper_scale = value
@@ -72,6 +76,9 @@ func _on_squish(x : float):
 	anim_scale = lerp(anim_scale, scale_factor * proper_scale, 0.5)
 #	anim_squish = target_squish
 	squash_factor.y = anim_squish
+
+func grow():
+	change_size(min(1.0, proper_scale + 0.2))
 
 func _select_random_target():
 	target_pos = get_viewport_rect().size * get_viewport_transform().get_scale()

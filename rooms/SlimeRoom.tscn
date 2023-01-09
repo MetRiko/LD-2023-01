@@ -39,45 +39,16 @@ texture = SubResource( 4 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Slime" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 200, 188 )
 
 [node name="Slime2" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 152, 90 )
+position = Vector2( 444, 184 )
 
-[node name="Slime3" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 146, 137 )
-
-[node name="Slime4" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 231, 141 )
-
-[node name="Slime5" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 249, 93 )
-
-[node name="Slime6" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 73, 143 )
-
-[node name="Slime7" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 145, 50 )
-
-[node name="Slime8" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 158, 191 )
-
-[node name="Slime9" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 214, 47 )
-
-[node name="Slime10" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 291, 189 )
+[node name="SlimeEgg4" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 455, 264 )
 
 [node name="SlimeJar" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 563, 157 )
-
-[node name="SlimeJar2" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 536, 261 )
-
-[node name="SlimeEgg" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 422, 248 )
-
-[node name="SlimeEgg2" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 497, 70 )
+position = Vector2( 173, 262 )
 
 [node name="Wall_1" type="StaticBody2D" parent="."]
 physics_material_override = SubResource( 3 )

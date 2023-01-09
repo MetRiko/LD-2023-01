@@ -40,8 +40,9 @@ func _on_hit():
 			area.get_parent().do_squish()
 			slime_hitted = true
 		if area is SlimeEgg:
-			area.set_ready_to_break()
-			egg_hitted = true
+			if global_position.y > 0.0:
+				area.set_ready_to_break()
+				egg_hitted = true
 #	if not slime_hitted:
 	Audio.play("OnHammerHit")
 	if slime_hitted:

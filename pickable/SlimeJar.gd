@@ -7,7 +7,7 @@ var gels := []
 var all_gels_count := 0
 var final_color : Color
 #var fill_level := 0.0
-var max_gels_count := 20
+var max_gels_count := 10
 var angle_level := 0.0
 
 func is_jar_empty():
