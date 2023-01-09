@@ -11,6 +11,7 @@ func set_ready_to_break():
 		$Egg.visible = false
 		set_pickable(false)
 		$Timer.start(3)
+		Audio.play("OnEggHit")
 
 func _crack_egg():
 	var slime = slime_tscn.instance()
@@ -19,6 +20,7 @@ func _crack_egg():
 	slime.global_position = position
 	slime.set_color($Inside.modulate)
 	slime.change_size(0.2)
+	Audio.play("OnSlimeSpawn")
 
 func _on_pickable_changed(pickable: bool):
 	$Egg.frame = int(pickable)
