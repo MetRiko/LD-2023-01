@@ -44,17 +44,19 @@ func change_angle_level(level: float):
 
 func _calculate_color():
 	if gels.size() > 0:
-		var h = gels[0].color.h
+		var h = 0.0
 		var s = gels[0].color.s
-		var v = gels[0].color.v
+		var v := 0.0
+		var w_sum := 0.0
 		for gel in gels:
-#			c = lerp(c, gel.color, float(gel.amount) / all_gels_count)
-			var factor = float(gel.amount) / all_gels_count
-			h = lerp(h, gel.color.h, factor)
-			v = lerp(v, gel.color.v, factor)
+			h += gel.color.h * gel.amount
+			v += gel.color.v * gel.amount
+			w_sum += gel.amount
+		h /= w_sum
+		v /= w_sum
 		return Color.from_hsv(h, s, v)
 	return Color.black
-
+	
 func _on_pickable_changed(pickable: bool):
 	$Jar.frame = int(pickable)
 

@@ -8,6 +8,7 @@ var distance : float
 
 var shader : ShaderMaterial
 var tween : SceneTreeTween
+var fade_tween : SceneTreeTween
 
 var prev_pos := Vector2.ZERO
 var start_scale : float
@@ -17,8 +18,8 @@ var final_color : Color
 
 func extract_some_gel(amount: int):
 	if amount > 0:
-		tween.custom_step(1.0)
-		if not tween.is_running():
+		fade_tween.custom_step(2.25)
+		if not fade_tween.is_running():
 			queue_free()
 
 func _ready():
@@ -49,9 +50,9 @@ func play_animation(final_pos : Vector2, particle_scale : float):
 	tween.connect("finished", self, "_on_hit")
 	
 func _start_fading():
-	var tween = get_tree().create_tween()
-	tween.tween_method(self, "_on_fading", 0.0, 1.0, 3.0 + start_scale * 3.0 + rand_range(0.0, 2.0)) # dur based on length
-	tween.connect("finished", self, "_on_faded")
+	fade_tween = get_tree().create_tween()
+	fade_tween.tween_method(self, "_on_fading", 0.0, 1.0, 3.0 + start_scale * 3.0 + rand_range(0.0, 2.0)) # dur based on length
+	fade_tween.connect("finished", self, "_on_faded")
 	
 func _on_fading(x : float):
 	var factor = pow(sin(x * 0.5 * PI + PI * 0.5), 0.4)

@@ -24,15 +24,25 @@ func _on_gel_entered(gel_area : Area2D):
 		var amount_to_extract = 1
 		var overflow = jar.add_gel(gel.start_color, amount_to_extract)
 		gel.extract_some_gel(amount_to_extract - overflow)
-		Audio.play("OnSlimePick")
+		if overflow == 0:
+			Audio.play("OnSlimePick")
+		else:
+			Audio.play("OnSlimePickTooMuch")
 
 func _on_hit():
+	var slime_hitted := false
+	var egg_hitted := false
 	for area in hammer_hitbox.get_overlapping_areas():
 		if area.get_parent() is Slime:
 			area.get_parent().do_squish()
-			Audio.play("OnSlimeHit")
+			slime_hitted = true
 		if area is SlimeEgg:
 			area.set_ready_to_break()
+			egg_hitted = true
+#	if not slime_hitted:
+	Audio.play("OnHammerHit")
+	if slime_hitted:
+		Audio.play("OnSlimeHit")
 
 func get_item_in_pocket():
 	return $Pocket.get_child(0) if $Pocket.get_child_count() > 0 else null

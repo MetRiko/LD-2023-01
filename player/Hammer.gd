@@ -31,7 +31,7 @@ func _update_hammer_pos():
 	position = start_hammer_pos + vec
 	
 	scale.x = 1.0 if vec.x >= 0 else -1.0 
-	$Body/Sprite.z_index = 0 if vec.y >= 0 else -1
+	$Body/Sprite.z_index = 1 if vec.y >= 0 else 0
 	
 	rotation = Vector2(vec.x * scale.x, vec.y * scale.x).angle()
 
@@ -44,8 +44,11 @@ func play_idle():
 func is_swinging():
 	return anim.current_animation == "Swing"
 
+func _play_sound():
+	pass
+#	Audio.play("OnHammerHit")
+
 func _try_hit():
-	Audio.play("OnHammerHit")
 	emit_signal("hit")
 #	var space = get_world_2d().get_direct_space_state()
 #	var results = space.intersect_point(hitpoint.global_position, 32, [], 2, false, true)

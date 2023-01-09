@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://slimes/SlimeTesting.tscn" type="PackedScene" id=1]
-[ext_resource path="res://res/on_slime_hit.wav" type="AudioStream" id=2]
+[ext_resource path="res://res/on_slime_hit_2.wav" type="AudioStream" id=2]
 [ext_resource path="res://res/on_egg_hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://res/on_jar_pick.wav" type="AudioStream" id=4]
-[ext_resource path="res://res/on_hammer_hit.wav" type="AudioStream" id=5]
+[ext_resource path="res://res/on_hammer_hit_2.wav" type="AudioStream" id=5]
 [ext_resource path="res://res/on_egg_pick.wav" type="AudioStream" id=6]
-[ext_resource path="res://res/on_slime_pick.wav" type="AudioStream" id=7]
+[ext_resource path="res://res/on_slime_pick_2.wav" type="AudioStream" id=7]
 [ext_resource path="res://res/on_slime_spawn.wav" type="AudioStream" id=8]
 [ext_resource path="res://res/on_drop.wav" type="AudioStream" id=9]
+[ext_resource path="res://res/on_slime_pick_too_much.wav" type="AudioStream" id=10]
 
 [node name="Root" type="Node2D"]
 
@@ -18,24 +19,39 @@
 
 [node name="OnEggHit" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 3 )
+volume_db = -24.0
+pitch_scale = 1.5
 
 [node name="OnEggPick" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 6 )
+volume_db = -24.0
 
 [node name="OnJarPick" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 4 )
+volume_db = -28.0
 
 [node name="OnSlimeHit" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 2 )
+volume_db = -24.0
+pitch_scale = 2.4
 
 [node name="OnSlimePick" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 7 )
+volume_db = -16.0
+pitch_scale = 1.5
+
+[node name="OnSlimePickTooMuch" type="AudioStreamPlayer" parent="AudioPlayers"]
+stream = ExtResource( 10 )
+volume_db = -10.0
 
 [node name="OnHammerHit" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 5 )
+volume_db = -24.0
 
 [node name="OnSlimeSpawn" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 8 )
+volume_db = -24.0
 
 [node name="OnDrop" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 9 )
+volume_db = -24.0

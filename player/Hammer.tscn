@@ -66,15 +66,19 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.25 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_play_sound"
+}, {
 "args": [  ],
 "method": "_try_hit"
 } ]
 }
 
 [node name="Hammer" type="Node2D"]
+show_behind_parent = true
 position = Vector2( 0, -14 )
 script = ExtResource( 2 )
 
