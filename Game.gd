@@ -2,7 +2,7 @@ extends Node
 
 onready var root = get_tree().root.get_node("Root")
 
-onready var slimes = root.get_node("SlimeTesting/Slimes")
+onready var slimes = root.get_node("RoomSwitcher/SlimeRoom/Slimes")
 
 func add_particle(particle : Node):
 	slimes.add_child(particle)

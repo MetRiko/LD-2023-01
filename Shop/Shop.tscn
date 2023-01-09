@@ -59,7 +59,7 @@ Button/styles/hover = SubResource( 9 )
 Button/styles/normal = SubResource( 10 )
 Button/styles/pressed = SubResource( 11 )
 
-[node name="Control" type="Control"]
+[node name="Shop" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
@@ -520,8 +520,9 @@ stretch_mode = 5
 
 [node name="Text" type="Label" parent="RightBar/Clients"]
 margin_left = 36.0
+margin_top = 9.0
 margin_right = 56.0
-margin_bottom = 30.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 20, 30 )
 custom_fonts/font = SubResource( 13 )
 text = "0"
@@ -541,9 +542,8 @@ margin_bottom = 48.0
 alignment = 1
 
 [node name="DaySprite" type="TextureRect" parent="RightBar/Days"]
-margin_top = -8.0
 margin_right = 32.0
-margin_bottom = 28.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 5 )
 expand = true
@@ -551,8 +551,9 @@ stretch_mode = 5
 
 [node name="Text" type="Label" parent="RightBar/Days"]
 margin_left = 36.0
+margin_top = 9.0
 margin_right = 56.0
-margin_bottom = 30.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 20, 30 )
 custom_fonts/font = SubResource( 13 )
 text = "0"
@@ -588,8 +589,9 @@ stretch_mode = 5
 
 [node name="Text" type="Label" parent="RightBar/Coins"]
 margin_left = 36.0
+margin_top = 9.0
 margin_right = 56.0
-margin_bottom = 30.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 20, 30 )
 custom_fonts/font = SubResource( 13 )
 text = "0"
