@@ -1,0 +1,167 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://sprites/settings.png" type="Texture" id=3]
+[ext_resource path="res://sprites/day.png" type="Texture" id=4]
+[ext_resource path="res://sprites/client.png" type="Texture" id=5]
+[ext_resource path="res://sprites/help.png" type="Texture" id=6]
+[ext_resource path="res://res/VT323-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://popups/Options.tscn" type="PackedScene" id=8]
+[ext_resource path="res://popups/ExitGame.tscn" type="PackedScene" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="Theme" id=6]
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 3 )
+Button/styles/normal = SubResource( 4 )
+Button/styles/pressed = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 7 )
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 80, 170 )
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_bottom = -50.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="RightBar" type="VBoxContainer" parent="Control"]
+margin_right = 110.0
+margin_bottom = 156.0
+
+[node name="Buttons" type="HBoxContainer" parent="Control/RightBar"]
+margin_right = 110.0
+margin_bottom = 32.0
+alignment = 1
+
+[node name="options" type="Button" parent="Control/RightBar/Buttons"]
+margin_left = 19.0
+margin_right = 51.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource( 6 )
+icon = ExtResource( 3 )
+icon_align = 1
+expand_icon = true
+
+[node name="exit" type="Button" parent="Control/RightBar/Buttons"]
+margin_left = 55.0
+margin_right = 87.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource( 6 )
+icon = ExtResource( 6 )
+icon_align = 1
+expand_icon = true
+
+[node name="HFill" type="Control" parent="Control/RightBar/Buttons"]
+margin_left = 91.0
+margin_right = 91.0
+margin_bottom = 32.0
+
+[node name="Separator" type="Control" parent="Control/RightBar"]
+margin_top = 36.0
+margin_right = 110.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 56, 0 )
+
+[node name="Clients" type="HBoxContainer" parent="Control/RightBar"]
+margin_top = 40.0
+margin_right = 110.0
+margin_bottom = 72.0
+alignment = 1
+
+[node name="ClientSprite" type="TextureRect" parent="Control/RightBar/Clients"]
+margin_left = 27.0
+margin_right = 59.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="Control/RightBar/Clients"]
+margin_left = 63.0
+margin_top = 1.0
+margin_right = 83.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 20, 30 )
+custom_fonts/font = SubResource( 7 )
+text = "0"
+valign = 1
+autowrap = true
+
+[node name="Separator2" type="Control" parent="Control/RightBar"]
+margin_top = 76.0
+margin_right = 110.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 110, 0 )
+
+[node name="Days" type="HBoxContainer" parent="Control/RightBar"]
+margin_top = 80.0
+margin_right = 110.0
+margin_bottom = 112.0
+alignment = 1
+
+[node name="DaySprite" type="TextureRect" parent="Control/RightBar/Days"]
+margin_left = 27.0
+margin_right = 59.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="Control/RightBar/Days"]
+margin_left = 63.0
+margin_top = 1.0
+margin_right = 83.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 20, 30 )
+custom_fonts/font = SubResource( 7 )
+text = "0"
+valign = 1
+autowrap = true
+
+[node name="Control2" type="Control" parent="Control/RightBar"]
+margin_top = 116.0
+margin_right = 110.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="Separator3" type="Control" parent="Control/RightBar"]
+margin_top = 120.0
+margin_right = 110.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 110, 0 )
+
+[node name="Options" parent="." instance=ExtResource( 8 )]
+
+[node name="ExitGame" parent="." instance=ExtResource( 9 )]
+
+[connection signal="pressed" from="Control/RightBar/Buttons/options" to="Options" method="_on_options_pressed"]
+[connection signal="pressed" from="Control/RightBar/Buttons/exit" to="ExitGame" method="_on_exit_pressed"]

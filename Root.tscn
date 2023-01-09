@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://rooms/SlimeRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/on_slime_hit_2.wav" type="AudioStream" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://res/on_slime_pick_too_much.wav" type="AudioStream" id=10]
 [ext_resource path="res://rooms/ShopRoom.tscn" type="PackedScene" id=11]
 [ext_resource path="res://rooms/RoomSwitcher.gd" type="Script" id=12]
+[ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=13]
 
 [node name="Root" type="Node2D"]
 
@@ -67,3 +68,5 @@ volume_db = -24.0
 [node name="OnDrop" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 9 )
 volume_db = -24.0
+
+[node name="HUD" parent="." instance=ExtResource( 13 )]

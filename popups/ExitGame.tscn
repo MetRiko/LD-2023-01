@@ -43,6 +43,7 @@ size = 20
 font_data = ExtResource( 3 )
 
 [node name="ExitGame" type="Popup"]
+visible = true
 margin_left = 85.0
 margin_top = 48.0
 margin_right = 552.0
@@ -75,11 +76,10 @@ custom_constants/separation = 60
 
 [node name="Label" type="Label" parent="TabContainer/Goal"]
 margin_right = 467.0
-margin_bottom = 227.0
+margin_bottom = 204.0
 custom_fonts/font = SubResource( 14 )
 text = "Your goal is to grow your slime farm. To do so you need to harvest slime chunks without killing your slimes, put those chunks in a jar and sell it to a customer. The more accurate the color of the jar contents, the more the customer is willing to pay. 
 -To sell the jar place it in front of a customer
--To buy an item walk into the space in front of a merchant
 -To create a new slime from an orb crack it with a hammer
 -To extract slime, hit your slimes with a hammer
 -To pick up slime, walk into it with a jar in your hands"
