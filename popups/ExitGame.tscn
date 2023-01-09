@@ -43,7 +43,6 @@ size = 20
 font_data = ExtResource( 3 )
 
 [node name="ExitGame" type="Popup"]
-visible = true
 margin_left = 85.0
 margin_top = 48.0
 margin_right = 552.0

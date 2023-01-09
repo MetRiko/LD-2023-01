@@ -44,4 +44,5 @@ func _on_jar_delivered(fill_factor : float, color_match_factor : float, client):
 	# color_match_factor - How different is colo 0.0-1.0 (1.0 = identical)
 	# fill_factor - How much jar is filled 0.0-1.0 (1.0 = full)
 	remove_client(client)
+	$"/root/Game".hud.addPoints(ceil(fill_factor*color_match_factor*100))
 	print('jar delivered: ', fill_factor, ' ', color_match_factor, ' ', client)
