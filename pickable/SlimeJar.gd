@@ -17,6 +17,9 @@ func reset_angle_level_with_animation():
 	var tween = get_tree().create_tween()
 	tween.tween_method(self, "change_angle_level", angle_level, 0.0, 0.4)
 
+func get_fill_level() -> float:
+	return float(all_gels_count) / max_gels_count
+
 func add_gel(color: Color, amount: int):
 	var overflow := 0
 	if all_gels_count < max_gels_count: 
@@ -69,7 +72,7 @@ func _ready():
 	$Liquid.material = shader
 	
 	shader.set_shader_param("u_color", final_color)
-	shader.set_shader_param("u_fill_level", all_gels_count / max_gels_count)
+	shader.set_shader_param("u_fill_level", float(all_gels_count) / max_gels_count)
 	change_angle_level(angle_level)
 	
 	$Jar.frame = 0

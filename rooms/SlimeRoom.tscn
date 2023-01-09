@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://slimes/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/SlimeRoom.gd" type="Script" id=2]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://pickable/SlimeJar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://pickable/SlimeEgg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://rooms/Farm.png" type="Texture" id=6]
@@ -38,9 +37,6 @@ scale = Vector2( 0.036185, 647.726 )
 texture = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
-
-[node name="Player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 360, 68 )
 
 [node name="Slime" parent="YSort" instance=ExtResource( 1 )]
 
