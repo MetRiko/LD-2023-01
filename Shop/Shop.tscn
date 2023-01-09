@@ -131,7 +131,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="CounterContainer/HBoxContainer"]
@@ -141,7 +141,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect3" type="TextureRect" parent="CounterContainer/HBoxContainer"]
@@ -151,7 +151,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="CounterContainer/HBoxContainer"]
@@ -161,7 +161,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect5" type="TextureRect" parent="CounterContainer/HBoxContainer"]
@@ -171,7 +171,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="HFill" type="Control" parent="CounterContainer"]
@@ -180,9 +180,9 @@ margin_right = 320.0
 margin_bottom = 44.0
 
 [node name="ClientContainer" type="VBoxContainer" parent="."]
-margin_top = 120.0
+margin_top = 112.0
 margin_right = 320.0
-margin_bottom = 168.0
+margin_bottom = 160.0
 alignment = 1
 
 [node name="HFill2" type="Control" parent="ClientContainer"]
@@ -423,7 +423,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="SellerContainer/HBoxContainer"]
@@ -433,7 +433,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect3" type="TextureRect" parent="SellerContainer/HBoxContainer"]
@@ -443,7 +443,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="SellerContainer/HBoxContainer"]
@@ -453,7 +453,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="HFill" type="Control" parent="SellerContainer"]
