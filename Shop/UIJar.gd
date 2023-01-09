@@ -22,6 +22,7 @@ var slimeData = {
 "Color": Color(1,0,0,1),
 "locked":0
 },
+
 3:{
 "name": "blueSlime",
 "Color": Color(0,0,1,1),

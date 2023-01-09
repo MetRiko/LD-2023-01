@@ -1,13 +1,20 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://res/projectFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://sprites/exit.png" type="Texture" id=2]
+[ext_resource path="res://sprites/help.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://sprites/settings.png" type="Texture" id=4]
-[ext_resource path="res://Shop/UIJar.gd" type="Script" id=5]
+[ext_resource path="res://sprites/day.png" type="Texture" id=5]
 [ext_resource path="res://Shop/Coins.gd" type="Script" id=6]
 [ext_resource path="res://Shop/ExitGame.gd" type="Script" id=7]
 [ext_resource path="res://Shop/Options.gd" type="Script" id=8]
+[ext_resource path="res://Shop/Shop.gd" type="Script" id=9]
+[ext_resource path="res://res/VT323-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://sprites/coin.png" type="Texture" id=11]
+[ext_resource path="res://Shop/Orders.gd" type="Script" id=12]
+[ext_resource path="res://sprites/order.png" type="Texture" id=13]
+[ext_resource path="res://sprites/client.png" type="Texture" id=14]
+[ext_resource path="res://sprites/orderBorder.png" type="Texture" id=15]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -25,6 +32,14 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 20
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
@@ -47,6 +62,7 @@ Button/styles/pressed = SubResource( 11 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 9 )
 
 [node name="Shop" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -63,47 +79,37 @@ rect_pivot_offset = Vector2( -65, -84 )
 color = Color( 0.537255, 0.356863, 0.121569, 1 )
 
 [node name="ColorRect3" type="ColorRect" parent="."]
-margin_left = 552.0
 margin_right = 640.0
-margin_bottom = 360.0
+margin_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( -65, -84 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-margin_left = 320.0
-margin_right = 368.0
-margin_bottom = 192.0
+margin_left = 368.0
+margin_top = 192.0
+margin_right = 640.0
+margin_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 15, 111 )
 color = Color( 0.701961, 0.356863, 0.121569, 1 )
 
 [node name="ColorRect5" type="ColorRect" parent="."]
-margin_left = 24.0
+margin_left = 440.0
 margin_top = 312.0
-margin_right = 104.0
+margin_right = 520.0
 margin_bottom = 351.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 15, 111 )
 color = Color( 0.701961, 0.356863, 0.121569, 1 )
 
-[node name="ColorRect4" type="ColorRect" parent="."]
-margin_left = 128.0
-margin_top = 320.0
-margin_right = 464.0
-margin_bottom = 360.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_pivot_offset = Vector2( 15, 111 )
-color = Color( 0.701961, 0.356863, 0.121569, 1 )
-
 [node name="CounterContainer" type="VBoxContainer" parent="."]
-margin_top = 192.0
+margin_top = 144.0
 margin_right = 320.0
-margin_bottom = 240.0
+margin_bottom = 192.0
 alignment = 1
 
 [node name="HFill2" type="Control" parent="CounterContainer"]
@@ -115,86 +121,57 @@ margin_bottom = 4.0
 margin_top = 8.0
 margin_right = 320.0
 margin_bottom = 40.0
+custom_constants/separation = 16
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 18.0
-margin_right = 50.0
+margin_left = 48.0
+margin_right = 80.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 54.0
-margin_right = 86.0
+margin_left = 96.0
+margin_right = 128.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect3" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 90.0
-margin_right = 122.0
+margin_left = 144.0
+margin_right = 176.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 158.0
+margin_left = 192.0
+margin_right = 224.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect5" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 162.0
-margin_right = 194.0
+margin_left = 240.0
+margin_right = 272.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 198.0
-margin_right = 230.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 234.0
-margin_right = 266.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="CounterContainer/HBoxContainer"]
-margin_left = 270.0
-margin_right = 302.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="HFill" type="Control" parent="CounterContainer"]
@@ -203,10 +180,9 @@ margin_right = 320.0
 margin_bottom = 44.0
 
 [node name="ClientContainer" type="VBoxContainer" parent="."]
-modulate = Color( 1, 0.721569, 0.4, 1 )
-margin_top = 144.0
+margin_top = 112.0
 margin_right = 320.0
-margin_bottom = 192.0
+margin_bottom = 160.0
 alignment = 1
 
 [node name="HFill2" type="Control" parent="ClientContainer"]
@@ -214,118 +190,174 @@ margin_top = 4.0
 margin_right = 320.0
 margin_bottom = 4.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ClientContainer"]
+[node name="Orders" type="HBoxContainer" parent="ClientContainer"]
 margin_top = 8.0
 margin_right = 320.0
 margin_bottom = 40.0
+custom_constants/separation = 16
 alignment = 1
+script = ExtResource( 12 )
 
-[node name="TextureRect" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 18.0
-margin_right = 50.0
+[node name="OrderContainer" type="Control" parent="ClientContainer/Orders"]
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="OrderBorder1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 15 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 54.0
-margin_right = 86.0
+[node name="Order1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer"]
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 13 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 90.0
-margin_right = 122.0
+[node name="OrderContainer2" type="Control" parent="ClientContainer/Orders"]
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="OrderBorder1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer2"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 15 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect4" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 126.0
-margin_right = 158.0
+[node name="Order1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer2"]
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 13 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect5" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 162.0
-margin_right = 194.0
+[node name="OrderContainer3" type="Control" parent="ClientContainer/Orders"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="OrderBorder1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer3"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 15 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect6" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 198.0
-margin_right = 230.0
+[node name="Order1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer3"]
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 13 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect7" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 234.0
-margin_right = 266.0
+[node name="OrderContainer4" type="Control" parent="ClientContainer/Orders"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="OrderBorder1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer4"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 15 )
 expand = true
+stretch_mode = 5
 
-[node name="TextureRect8" type="TextureRect" parent="ClientContainer/HBoxContainer"]
-margin_left = 270.0
-margin_right = 302.0
+[node name="Order1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer4"]
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 13 )
 expand = true
+stretch_mode = 5
+
+[node name="OrderContainer5" type="Control" parent="ClientContainer/Orders"]
+margin_left = 240.0
+margin_right = 272.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="OrderBorder1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer5"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 5
+
+[node name="Order1" type="TextureRect" parent="ClientContainer/Orders/OrderContainer5"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 5
 
 [node name="HFill" type="Control" parent="ClientContainer"]
 margin_top = 44.0
 margin_right = 320.0
 margin_bottom = 44.0
 
-[node name="CounterContainer2" type="HBoxContainer" parent="."]
-margin_left = 320.0
-margin_right = 368.0
-margin_bottom = 152.0
+[node name="CounterContainer2" type="VBoxContainer" parent="."]
+margin_left = 400.0
+margin_top = 103.0
+margin_right = 540.0
+margin_bottom = 143.0
 alignment = 1
 
 [node name="HFill2" type="Control" parent="CounterContainer2"]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 152.0
+margin_right = 176.0
 
-[node name="HBoxContainer" type="VBoxContainer" parent="CounterContainer2"]
-margin_left = 8.0
-margin_right = 40.0
-margin_bottom = 152.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CounterContainer2"]
+margin_top = 4.0
+margin_right = 176.0
+margin_bottom = 36.0
+custom_constants/separation = 16
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CounterContainer2/HBoxContainer"]
-margin_top = 6.0
 margin_right = 32.0
-margin_bottom = 38.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -333,9 +365,9 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="CounterContainer2/HBoxContainer"]
-margin_top = 42.0
-margin_right = 32.0
-margin_bottom = 74.0
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -343,9 +375,9 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="TextureRect3" type="TextureRect" parent="CounterContainer2/HBoxContainer"]
-margin_top = 78.0
-margin_right = 32.0
-margin_bottom = 110.0
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -353,9 +385,9 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="CounterContainer2/HBoxContainer"]
-margin_top = 114.0
-margin_right = 32.0
-margin_bottom = 146.0
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -363,197 +395,84 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="HFill" type="Control" parent="CounterContainer2"]
-margin_left = 44.0
-margin_right = 44.0
-margin_bottom = 152.0
+margin_top = 40.0
+margin_right = 176.0
+margin_bottom = 40.0
 
-[node name="SellerContainer" type="HBoxContainer" parent="."]
+[node name="SellerContainer" type="VBoxContainer" parent="."]
 modulate = Color( 0.54902, 1, 0.768627, 1 )
-margin_left = 264.0
-margin_right = 312.0
-margin_bottom = 152.0
+margin_left = 400.0
+margin_top = 148.0
+margin_right = 576.0
+margin_bottom = 188.0
 alignment = 1
 
 [node name="HFill2" type="Control" parent="SellerContainer"]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 152.0
+margin_right = 176.0
 
-[node name="HBoxContainer" type="VBoxContainer" parent="SellerContainer"]
-margin_left = 8.0
-margin_right = 40.0
-margin_bottom = 152.0
+[node name="HBoxContainer" type="HBoxContainer" parent="SellerContainer"]
+margin_top = 4.0
+margin_right = 176.0
+margin_bottom = 36.0
+custom_constants/separation = 16
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="SellerContainer/HBoxContainer"]
-margin_top = 6.0
 margin_right = 32.0
-margin_bottom = 38.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect2" type="TextureRect" parent="SellerContainer/HBoxContainer"]
-margin_top = 42.0
-margin_right = 32.0
-margin_bottom = 74.0
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect3" type="TextureRect" parent="SellerContainer/HBoxContainer"]
-margin_top = 78.0
-margin_right = 32.0
-margin_bottom = 110.0
+margin_left = 96.0
+margin_right = 128.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="TextureRect4" type="TextureRect" parent="SellerContainer/HBoxContainer"]
-margin_top = 114.0
-margin_right = 32.0
-margin_bottom = 146.0
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="HFill" type="Control" parent="SellerContainer"]
-margin_left = 44.0
-margin_right = 44.0
-margin_bottom = 152.0
-
-[node name="UIJar" type="VBoxContainer" parent="."]
-margin_left = 128.0
-margin_top = 320.0
-margin_right = 464.0
-margin_bottom = 360.0
-alignment = 1
-
-[node name="HFill2" type="Control" parent="UIJar"]
-margin_right = 336.0
-
-[node name="UIJarContent" type="HBoxContainer" parent="UIJar"]
-margin_top = 4.0
-margin_right = 336.0
-margin_bottom = 36.0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 26.0
-margin_right = 58.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 62.0
-margin_right = 94.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 98.0
-margin_right = 130.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 134.0
-margin_right = 166.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 170.0
-margin_right = 202.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 206.0
-margin_right = 238.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 242.0
-margin_right = 274.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="UIJar/UIJarContent"]
-margin_left = 278.0
-margin_right = 310.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource( 3 )
-expand = true
-
-[node name="HFill" type="Control" parent="UIJar"]
 margin_top = 40.0
-margin_right = 336.0
+margin_right = 176.0
 margin_bottom = 40.0
 
-[node name="RightBar" type="VBoxContainer" parent="."]
-margin_left = 552.0
+[node name="RightBar" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
 margin_right = 640.0
-margin_bottom = 360.0
+margin_bottom = 56.0
 
-[node name="Buttons" type="VBoxContainer" parent="RightBar"]
-margin_right = 88.0
-margin_bottom = 40.0
-alignment = 1
+[node name="Buttons" type="HBoxContainer" parent="RightBar"]
+margin_right = 72.0
+margin_bottom = 48.0
 
-[node name="HFill2" type="Control" parent="RightBar/Buttons"]
-margin_right = 88.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="RightBar/Buttons"]
-margin_top = 4.0
-margin_right = 88.0
-margin_bottom = 36.0
-custom_constants/separation = 12
-alignment = 1
-
-[node name="options" type="Button" parent="RightBar/Buttons/HBoxContainer"]
-margin_left = 6.0
-margin_right = 38.0
+[node name="options" type="Button" parent="RightBar/Buttons"]
+margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
@@ -563,9 +482,9 @@ icon = ExtResource( 4 )
 icon_align = 1
 expand_icon = true
 
-[node name="exit" type="Button" parent="RightBar/Buttons/HBoxContainer"]
-margin_left = 50.0
-margin_right = 82.0
+[node name="exit" type="Button" parent="RightBar/Buttons"]
+margin_left = 36.0
+margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 0
@@ -576,153 +495,106 @@ icon_align = 1
 expand_icon = true
 
 [node name="HFill" type="Control" parent="RightBar/Buttons"]
-margin_top = 40.0
-margin_right = 88.0
-margin_bottom = 40.0
+margin_left = 72.0
+margin_right = 72.0
+margin_bottom = 48.0
 
 [node name="Separator" type="Control" parent="RightBar"]
-margin_top = 44.0
-margin_right = 88.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 0, 20 )
+margin_left = 76.0
+margin_right = 132.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 56, 0 )
+
+[node name="Clients" type="HBoxContainer" parent="RightBar"]
+margin_left = 136.0
+margin_right = 192.0
+margin_bottom = 48.0
+alignment = 1
+
+[node name="ClientSprite" type="TextureRect" parent="RightBar/Clients"]
+margin_right = 32.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 14 )
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="RightBar/Clients"]
+margin_left = 36.0
+margin_right = 56.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 20, 30 )
+custom_fonts/font = SubResource( 13 )
+text = "0"
+valign = 1
+autowrap = true
+
+[node name="Separator2" type="Control" parent="RightBar"]
+margin_left = 196.0
+margin_right = 306.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 110, 0 )
+
+[node name="Days" type="HBoxContainer" parent="RightBar"]
+margin_left = 310.0
+margin_right = 366.0
+margin_bottom = 48.0
+alignment = 1
+
+[node name="DaySprite" type="TextureRect" parent="RightBar/Days"]
+margin_top = -8.0
+margin_right = 32.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="RightBar/Days"]
+margin_left = 36.0
+margin_right = 56.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 20, 30 )
+custom_fonts/font = SubResource( 13 )
+text = "0"
+valign = 1
+autowrap = true
+
+[node name="Control2" type="Control" parent="RightBar"]
+margin_left = 370.0
+margin_right = 390.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="Separator3" type="Control" parent="RightBar"]
+margin_left = 394.0
+margin_right = 504.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 110, 0 )
 
 [node name="Coins" type="HBoxContainer" parent="RightBar"]
-margin_top = 68.0
-margin_right = 88.0
-margin_bottom = 116.0
+margin_left = 508.0
+margin_right = 564.0
+margin_bottom = 48.0
 alignment = 1
 script = ExtResource( 6 )
 
 [node name="CoinSprite" type="TextureRect" parent="RightBar/Coins"]
 modulate = Color( 1, 0.937255, 0, 1 )
-margin_left = 2.0
-margin_right = 34.0
+margin_right = 32.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 3 )
-expand = true
+texture = ExtResource( 11 )
+stretch_mode = 5
 
-[node name="Text" type="RichTextLabel" parent="RightBar/Coins"]
-margin_left = 38.0
-margin_right = 86.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-custom_fonts/mono_font = ExtResource( 1 )
-custom_fonts/bold_italics_font = ExtResource( 1 )
-custom_fonts/italics_font = ExtResource( 1 )
-custom_fonts/bold_font = ExtResource( 1 )
-custom_fonts/normal_font = ExtResource( 1 )
-tab_size = 1
-text = "20"
-
-[node name="Separator2" type="Control" parent="RightBar"]
-margin_top = 120.0
-margin_right = 88.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 0, 80 )
-
-[node name="JarColorContainer" type="HBoxContainer" parent="RightBar"]
-margin_top = 204.0
-margin_right = 88.0
-margin_bottom = 291.0
-alignment = 1
-script = ExtResource( 5 )
-
-[node name="HFill2" type="Control" parent="RightBar/JarColorContainer"]
-margin_left = 8.0
-margin_right = 8.0
-margin_bottom = 87.0
-
-[node name="UIJarContent" type="VBoxContainer" parent="RightBar/JarColorContainer"]
-margin_left = 12.0
-margin_right = 76.0
-margin_bottom = 87.0
-custom_constants/separation = 3
-alignment = 1
-
-[node name="TextureRect" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_right = 64.0
-margin_bottom = 6.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect2" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 9.0
-margin_right = 64.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect3" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 18.0
-margin_right = 64.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect4" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 27.0
-margin_right = 64.0
-margin_bottom = 33.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect5" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 36.0
-margin_right = 64.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect6" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 45.0
-margin_right = 64.0
-margin_bottom = 51.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect7" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 54.0
-margin_right = 64.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect8" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 63.0
-margin_right = 64.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect9" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 72.0
-margin_right = 64.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="TextureRect10" type="ColorRect" parent="RightBar/JarColorContainer/UIJarContent"]
-margin_top = 81.0
-margin_right = 64.0
-margin_bottom = 87.0
-rect_min_size = Vector2( 64, 6 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="HFill" type="Control" parent="RightBar/JarColorContainer"]
-margin_left = 80.0
-margin_right = 80.0
-margin_bottom = 87.0
+[node name="Text" type="Label" parent="RightBar/Coins"]
+margin_left = 36.0
+margin_right = 56.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 20, 30 )
+custom_fonts/font = SubResource( 13 )
+text = "0"
+valign = 1
+autowrap = true
 
 [node name="ExitGame" type="Popup" parent="."]
 margin_left = 85.0
@@ -730,6 +602,14 @@ margin_top = 48.0
 margin_right = 552.0
 margin_bottom = 311.0
 script = ExtResource( 7 )
+
+[node name="ColorRect2" type="ColorRect" parent="ExitGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 2.0
+margin_bottom = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="ExitGame"]
 anchor_right = 1.0
@@ -739,22 +619,26 @@ color = Color( 0.643137, 0.498039, 0, 1 )
 [node name="VBoxContainer" type="VBoxContainer" parent="ExitGame"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 custom_constants/separation = 60
 
-[node name="Control" type="Control" parent="ExitGame/VBoxContainer"]
-margin_right = 467.0
-
 [node name="Label" type="Label" parent="ExitGame/VBoxContainer"]
-margin_top = 60.0
-margin_right = 467.0
-margin_bottom = 129.0
-custom_fonts/font = ExtResource( 1 )
-text = "Are you sure you want to quit
- the game?"
-align = 1
+margin_right = 427.0
+margin_bottom = 227.0
+custom_fonts/font = SubResource( 14 )
+text = "-To extract slime, hit a slime with your hammer, pick up your jar and insert dropped slime chunks into the jar
+
+-To sell the jar walk up to the counter with matching colour mixture and press the interaction key
+
+-To buy more slimes or upgrades for your hammer walk up to the item you want to buy with enough coins and press the interaction key"
 valign = 1
+autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ExitGame/VBoxContainer"]
+visible = false
 margin_top = 189.0
 margin_right = 467.0
 margin_bottom = 239.0
@@ -839,5 +723,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.25098, 0.176471, 0.0509804, 1 )
 
-[connection signal="pressed" from="RightBar/Buttons/HBoxContainer/options" to="Options" method="_on_options_pressed"]
-[connection signal="pressed" from="RightBar/Buttons/HBoxContainer/exit" to="ExitGame" method="_on_exit_pressed"]
+[connection signal="pressed" from="RightBar/Buttons/options" to="Options" method="_on_options_pressed"]
+[connection signal="pressed" from="RightBar/Buttons/exit" to="ExitGame" method="_on_exit_pressed"]
