@@ -43,6 +43,11 @@ func _on_hit():
 	Audio.play("OnHammerHit")
 	if slime_hitted:
 		Audio.play("OnSlimeHit")
+	
+	if not slime_hitted:
+		$HammerHitbox/HitParticles.restart()
+		$HammerHitbox/HitParticles.emitting = true
+	$HammerHitbox/HammerIndicator.modulate = Color(0.8, 0.8, 0.8, 0.6)
 
 func get_item_in_pocket():
 	return $Pocket.get_child(0) if $Pocket.get_child_count() > 0 else null
@@ -51,6 +56,7 @@ func _input(event):
 	if event.is_action_pressed("game_swing") and hammer.visible:
 		hammer_locked_pos = hammer.position
 		hammer.play_swing()
+		$HammerHitbox/HammerIndicator.modulate = Color.white
 	if event.is_action_pressed("game_action"):
 		if $Pocket.get_child_count() == 0:
 			var closest_distance := 100000.0

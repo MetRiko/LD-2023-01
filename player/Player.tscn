@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.png" type="Texture" id=2]
 [ext_resource path="res://player/Hammer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player/HammerIndicator.png" type="Texture" id=4]
+[ext_resource path="res://player/HemmerParticles.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 4.00002
@@ -106,6 +107,35 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -2 ) ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=18]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0.0451613, 0.741935 )
+colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 19 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 40.0
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -10.0
+scale = 0.75
+scale_random = 0.5
+color_ramp = SubResource( 17 )
+anim_offset = 1.0
+anim_offset_random = 1.0
+
 [sub_resource type="CapsuleShape2D" id=10]
 height = 16.0
 
@@ -140,15 +170,25 @@ position = Vector2( 0, -0.189999 )
 [node name="HammerHitbox" type="Area2D" parent="."]
 show_behind_parent = true
 position = Vector2( 0, 14 )
-rotation = 1.57079
 collision_layer = 0
 collision_mask = 6
 
+[node name="HitParticles" type="Particles2D" parent="HammerHitbox"]
+material = SubResource( 18 )
+emitting = false
+one_shot = true
+explosiveness = 0.9
+visibility_rect = Rect2( -50, -50, 100, 100 )
+local_coords = false
+process_material = SubResource( 20 )
+texture = ExtResource( 5 )
+
 [node name="HammerIndicator" type="Sprite" parent="HammerHitbox"]
-rotation = -1.57079
+modulate = Color( 0.8, 0.8, 0.8, 0.6 )
 texture = ExtResource( 4 )
 
 [node name="Shape" type="CollisionShape2D" parent="HammerHitbox"]
+rotation = 1.5708
 shape = SubResource( 10 )
 
 [node name="Pocket" type="Node2D" parent="."]
