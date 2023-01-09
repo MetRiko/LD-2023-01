@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://slimes/Slime.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/SlimeRoom.gd" type="Script" id=2]
@@ -7,11 +7,18 @@
 [ext_resource path="res://pickable/SlimeEgg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://rooms/Farm.png" type="Texture" id=6]
 
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.614583, 0.875, 0.942708, 1 )
+colors = PoolColorArray( 1, 0.917647, 0.541176, 0, 1, 0.917647, 0.541176, 0.0677083, 1, 0.917647, 0.541176, 0.433066, 1, 0.917647, 0.541176, 0.645666, 1, 0.917647, 0.541176, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 1 )
+
 [sub_resource type="PhysicsMaterial" id=3]
 friction = 0.0
 bounce = 0.5
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 190 )
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -24,50 +31,56 @@ script = ExtResource( 2 )
 position = Vector2( 320, 180 )
 texture = ExtResource( 6 )
 
-[node name="Slimes" type="YSort" parent="."]
+[node name="Light" type="Sprite" parent="."]
+position = Vector2( 323, 36 )
+rotation = -1.57079
+scale = Vector2( 0.036185, 647.726 )
+texture = SubResource( 4 )
 
-[node name="Player" parent="Slimes" instance=ExtResource( 3 )]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 360, 68 )
 
-[node name="Slime" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime" parent="YSort" instance=ExtResource( 1 )]
 
-[node name="Slime2" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime2" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 152, 90 )
 
-[node name="Slime3" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime3" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 146, 137 )
 
-[node name="Slime4" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime4" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 231, 141 )
 
-[node name="Slime5" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime5" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 249, 93 )
 
-[node name="Slime6" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime6" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 73, 143 )
 
-[node name="Slime7" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime7" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 145, 50 )
 
-[node name="Slime8" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime8" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 158, 191 )
 
-[node name="Slime9" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime9" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 214, 47 )
 
-[node name="Slime10" parent="Slimes" instance=ExtResource( 1 )]
+[node name="Slime10" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 291, 189 )
 
-[node name="SlimeJar" parent="Slimes" instance=ExtResource( 4 )]
+[node name="SlimeJar" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 563, 157 )
 
-[node name="SlimeJar2" parent="Slimes" instance=ExtResource( 4 )]
+[node name="SlimeJar2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 536, 261 )
 
-[node name="SlimeEgg" parent="Slimes" instance=ExtResource( 5 )]
+[node name="SlimeEgg" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 422, 248 )
 
-[node name="SlimeEgg2" parent="Slimes" instance=ExtResource( 5 )]
+[node name="SlimeEgg2" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 497, 70 )
 
 [node name="Wall_1" type="StaticBody2D" parent="."]
@@ -75,16 +88,18 @@ physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_1"]
 position = Vector2( 0, 180 )
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="Wall_2" type="StaticBody2D" parent="."]
 physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_2"]
 position = Vector2( 641, 180 )
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="Wall_3" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_3"]
@@ -97,6 +112,3 @@ physics_material_override = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_4"]
 position = Vector2( 320.5, 360 )
 shape = SubResource( 2 )
-
-[node name="SlimeJar" type="Sprite" parent="."]
-position = Vector2( 406, 47 )

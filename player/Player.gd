@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
+signal item_dropped
+
 const MAX_SPEED := 160
 const ACCELERATION := 20
 
@@ -16,6 +18,7 @@ var hammer_pos_radius := Vector2(16.0, 8.0)
 func _ready():
 	hammer.connect("hit", self, "_on_hit")
 	$GelPickupHitbox.connect("area_entered", self, "_on_gel_entered")
+	Game.player = self
 	
 func _on_gel_entered(gel_area : Area2D):
 	var jar = get_item_in_pocket()
@@ -85,6 +88,7 @@ func _input(event):
 			obj.position = position
 			_enable_hammer()
 			Audio.play("OnDrop")
+			emit_signal("item_dropped", obj)
 
 func _process(_delta):
 	hammer_hitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
