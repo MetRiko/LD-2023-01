@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Shop/Options.gd" type="Script" id=1]
+[ext_resource path="res://res/projectFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sprites/order.png" type="Texture" id=3]
+[ext_resource path="res://res/VT323-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://popups/HSlider.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 1, 1, 1, 0.470588 )
+grow_begin = -2.0
+grow_end = 160.0
+thickness = 6
+
+[sub_resource type="Theme" id=4]
+HSlider/icons/grabber = ExtResource( 3 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 3 )
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = SubResource( 1 )
+HSlider/styles/grabber_area_highlight = SubResource( 2 )
+HSlider/styles/slider = SubResource( 3 )
+
+[node name="Options" type="Popup"]
+margin_left = 85.0
+margin_top = 48.0
+margin_right = 552.0
+margin_bottom = 311.0
+script = ExtResource( 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 2.0
+margin_bottom = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.360784, 0.192157, 0.0431373, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 1
+
+[node name="Control3" type="HSeparator" parent="VBoxContainer"]
+margin_right = 467.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 61.0
+margin_right = 467.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 2 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="Control" type="HSeparator" parent="VBoxContainer"]
+margin_top = 95.0
+margin_right = 467.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 156.0
+margin_right = 467.0
+margin_bottom = 173.0
+custom_fonts/font = SubResource( 5 )
+text = "volume"
+align = 1
+valign = 1
+
+[node name="Control2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 174.0
+margin_right = 467.0
+margin_bottom = 178.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 179.0
+margin_right = 467.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 130, 0 )
+custom_constants/separation = 100
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+margin_left = 150.0
+margin_right = 150.0
+margin_bottom = 16.0
+theme = SubResource( 4 )
+min_value = -30.0
+max_value = 0.0
+script = ExtResource( 5 )
+
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HSlider" to="VBoxContainer/HBoxContainer/HSlider" method="_on_HSlider_value_changed"]
