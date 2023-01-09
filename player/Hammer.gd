@@ -45,6 +45,7 @@ func is_swinging():
 	return anim.current_animation == "Swing"
 
 func _try_hit():
+	Audio.play("OnHammerHit")
 	emit_signal("hit")
 #	var space = get_world_2d().get_direct_space_state()
 #	var results = space.intersect_point(hitpoint.global_position, 32, [], 2, false, true)

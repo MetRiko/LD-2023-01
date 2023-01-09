@@ -24,11 +24,13 @@ func _on_gel_entered(gel_area : Area2D):
 		var amount_to_extract = 1
 		var overflow = jar.add_gel(gel.start_color, amount_to_extract)
 		gel.extract_some_gel(amount_to_extract - overflow)
+		Audio.play("OnSlimePick")
 
 func _on_hit():
 	for area in hammer_hitbox.get_overlapping_areas():
 		if area.get_parent() is Slime:
 			area.get_parent().do_squish()
+			Audio.play("OnSlimeHit")
 		if area is SlimeEgg:
 			area.set_ready_to_break()
 
@@ -39,13 +41,6 @@ func _input(event):
 	if event.is_action_pressed("game_swing") and hammer.visible:
 		hammer_locked_pos = hammer.position
 		hammer.play_swing()
-#	elif event.is_action_pressed("game_swing") and $Pocket.get_child_count() > 0:
-#		var obj = $Pocket.get_child(0)
-#		if obj is SlimeEgg:
-#			obj.drop_on(get_parent())
-#			obj.position = position
-#			obj.set_ready_to_break()
-#			_enable_hammer()
 	if event.is_action_pressed("game_action"):
 		if $Pocket.get_child_count() == 0:
 			var closest_distance := 100000.0
@@ -57,10 +52,13 @@ func _input(event):
 						closest_distance = dis
 						closest_pickable = area
 			if closest_pickable:
+				if closest_pickable is SlimeJar:
+					Audio.play("OnJarPick")
+				elif closest_pickable is SlimeEgg:
+					Audio.play("OnEggPick")
 				closest_pickable.pick_by($Pocket)
 				closest_pickable.position = Vector2.ZERO
-				hammer.visible = false
-				hammer_hitbox.visible = false
+				_disable_hammer()
 
 	if event.is_action_released("game_action"):
 		if $Pocket.get_child_count() > 0:
@@ -70,9 +68,9 @@ func _input(event):
 				obj.reset_angle_level_with_animation()
 			obj.position = position
 			_enable_hammer()
+			Audio.play("OnDrop")
 
 func _process(_delta):
-	var viewing_angle = _get_viewing_angle()
 	hammer_hitbox.global_position = global_position + hammer.hammer_elipse_vec * 4.0
 	
 	if $Pocket.get_child_count() > 0:
