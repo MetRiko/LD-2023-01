@@ -9,6 +9,7 @@ height = 8.0
 
 [node name="SlimeEgg" type="Area2D"]
 collision_layer = 4
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Inside" type="Sprite" parent="."]

@@ -27,9 +27,10 @@ func _on_gel_entered(gel_area : Area2D):
 
 func _on_hit():
 	for area in hammer_hitbox.get_overlapping_areas():
-		var slime = area.get_parent()
-		if slime is Slime:
-			slime.do_squish()
+		if area.get_parent() is Slime:
+			area.get_parent().do_squish()
+		if area is SlimeEgg:
+			area.set_ready_to_break()
 
 func get_item_in_pocket():
 	return $Pocket.get_child(0) if $Pocket.get_child_count() > 0 else null
@@ -38,15 +39,13 @@ func _input(event):
 	if event.is_action_pressed("game_swing") and hammer.visible:
 		hammer_locked_pos = hammer.position
 		hammer.play_swing()
-	elif event.is_action_pressed("game_swing") and $Pocket.get_child_count() > 0:
-		var obj = $Pocket.get_child(0)
-		if obj is SlimeEgg:
-			obj.drop_on(get_parent())
-			obj.position = position
-			obj.get_node("Egg").visible = false
-			obj.set_pickable(false)
-			obj.set_ready_to_break()
-			_enable_hammer()
+#	elif event.is_action_pressed("game_swing") and $Pocket.get_child_count() > 0:
+#		var obj = $Pocket.get_child(0)
+#		if obj is SlimeEgg:
+#			obj.drop_on(get_parent())
+#			obj.position = position
+#			obj.set_ready_to_break()
+#			_enable_hammer()
 	if event.is_action_pressed("game_action"):
 		if $Pocket.get_child_count() == 0:
 			var closest_distance := 100000.0

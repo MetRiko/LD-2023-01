@@ -20,6 +20,11 @@ export var res : Resource
 var squish_tween : SceneTreeTween
 var anim_squish : float = 0.0
 
+func change_size(factor: float):
+	anim_scale = factor
+	_change_proper_scale(factor)
+	play_squish()
+
 func create_random_particle():
 	var p = slime_particle.instance()
 #	p.global_position = global_position

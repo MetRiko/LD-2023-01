@@ -3,8 +3,14 @@ class_name SlimeEgg
 
 const slime_tscn := preload("res://slimes/Slime.tscn")
 
+var cracked := false
+
 func set_ready_to_break():
-	$Timer.start(3)
+	if not cracked:
+		cracked = true
+		$Egg.visible = false
+		set_pickable(false)
+		$Timer.start(3)
 
 func _crack_egg():
 	var slime = slime_tscn.instance()
@@ -12,6 +18,7 @@ func _crack_egg():
 	queue_free()
 	slime.global_position = position
 	slime.set_color($Inside.modulate)
+	slime.change_size(0.2)
 
 func _on_pickable_changed(pickable: bool):
 	$Egg.frame = int(pickable)
